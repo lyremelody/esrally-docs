@@ -4,7 +4,7 @@ Rally |release|
 
 .. ifconfig:: release.endswith('.dev0')
 
-    .. 警告::
+    .. warning::
         
         这个是Rally当前开发版文档。
         你可以看看 `最新稳定版文档 <//esrally.readthedocs.io/en/stable/>`_?
