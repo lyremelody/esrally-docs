@@ -1,59 +1,59 @@
-Installation
+安装
 ------------
 
-This is the detailed installation guide for Rally. If you are in a hurry you can check the :doc:`quickstart guide </quickstart>`.
+这是Rally的详细安装指南。如果你赶时间，你可以去看看 :doc:`快速入门 </quickstart>` 。
 
-Prerequisites
+先决条件
 ~~~~~~~~~~~~~
 
-Before installing Rally, please ensure that the following packages are installed:
+在开始安装Rally前，请确定已经安装下面这些包：
 
-* Python 3.4 or better available as `python3` on the path (verify with: ``python3 --version`` which should print ``Python 3.4.0`` or higher)
-* ``pip3`` available on the path (verify with ``pip3 --version``)
+* Python 3.4 或者 `python3` （通过 ``python3 --version`` 验证，应该打印 ``Python 3.4.0`` 或更高版本 ）
+* ``pip3`` 在PATH中（通过 ``pip3 --version`` 验证）
 * JDK 8
-* git 1.9 or better
+* git 1.9 或更高版本
 
-Rally does not support Windows and is only actively tested on Mac OS X and Linux.
-
-.. note::
-
-   If you use RHEL, please ensure to install a recent version of git via the `Red Hat Software Collections <https://www.softwarecollections.org/en/scls/rhscl/git19/>`_.
-
-
-Installing Rally
-~~~~~~~~~~~~~~~~
-
-Simply install Rally with pip: ``pip3 install esrally``
+Rally不支持Windows，只在Mac OS X和Linux上测试过。
 
 .. note::
 
-   Depending on your system setup you may need to prepend this command with ``sudo``.
+   如果你使用RHEL，请通过 `Red Hat Software Collections <https://www.softwarecollections.org/en/scls/rhscl/git19/>`_ 确定安装了最新的git。
 
-If you get errors during installation, it is probably due to the installation of ``psutil`` which we use to gather system metrics like CPU utilization. Please check the `installation instructions of psutil <https://github.com/giampaolo/psutil/blob/master/INSTALL.rst>`_ in this case. Keep in mind that Rally is based on Python 3 and you need to install the Python 3 header files instead of the Python 2 header files on Linux.
 
-Non-sudo Install
+安装Rally
 ~~~~~~~~~~~~~~~~
 
-If you don't want to use ``sudo`` when installing Rally, installation is still possible but a little more involved:
+使用pip进行安装，很简单：``pip3 install esrally``
+
+.. note::
+
+   根据你的系统对于软件安装的要求，你可能会要使用 ``sudo``
+
+如果在安装过程中出错，可能是在安装 ``psutil`` 出错，我们使用 ``psutil`` 来收集系统参数比如CPU利用率。这种情况，需要看看 `installation instructions of psutil <https://github.com/giampaolo/psutil/blob/master/INSTALL.rst>`_ 。记住Rally是基于Python 3的，你需要安装Python 3相关头文件，而不是Python 2的。
+
+Non-sudo安装
+~~~~~~~~~~~~~~~~
+
+如果你不想用 ``sudo`` ，也是可行的，只是稍微复杂一点：
 
 1. Specify the ``--user`` option when installing Rally (step 2 above), so the command to be issued is: ``python3 setup.py develop --user``.
 2. Check the output of the install script or lookup the `Python documentation on the variable site.USER_BASE <https://docs.python.org/3.5/library/site.html#site.USER_BASE>`_ to find out where the script is located. On Linux, this is typically ``~/.local/bin``.
 
 You can now either add ``~/.local/bin`` to your path or invoke Rally via ``~/.local/bin/esrally`` instead of just ``esrally``.
 
-VirtualEnv Install
+VirtualEnv安装
 ~~~~~~~~~~~~~~~~~~
 
-You can also use Virtualenv to install Rally into an isolated Python environment without sudo.
+你也可以使用Virtualenv来安装Rally到一个隔离的环境，而不用使用sudo。
 
-1. Set up a new virtualenv environment in a directory with ``virtualenv --python=python3``.
-2. Activate the environment with ``/path/to/virtualenv/dir/bin/activate``.
-3. Install Rally with ``pip install esrally``
+1. 使用 ``virtualenv --python=python3`` 安装一个新virtualenv环境到一个目录
+2. 使用 ``/path/to/virtualenv/dir/bin/activate`` 激活这个virtualenv环境
+3. 使用 ``pip install esrally`` 安装Rally
 
-Whenever you want to use Rally, run the activation script (step 2 above) first.  When you are done, simply execute ``deactivate`` in the shell to exit the virtual environment.
+当你要使用Rally时，先运行激活脚本（上面第2步）。当你使用完Rally，在Shell中执行 ``deactivate``  来退出虚拟环境。
 
 
-Next Steps
+下一步
 ~~~~~~~~~~
 
-After you have installed, you need to configure it. Just run ``esrally configure`` or follow the :doc:`configuration help page </configuration>` for more guidance.
+当你安装完成，你还需要配置它。执行 ``esrally configure`` 或者参考 :doc:`配置帮助 </configuration>`
