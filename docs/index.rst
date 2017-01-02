@@ -5,31 +5,31 @@ Rally |release|
 .. ifconfig:: release.endswith('.dev0')
 
     .. warning::
+        
+        这个是Rally当前开发版文档。
+        你可以看看 `最新稳定版文档 <//esrally.readthedocs.io/en/stable/>`_?
 
-        This documentation is for the version of Rally currently under development.
-        Where you looking for the `documentation of the latest stable version <//esrally.readthedocs.io/en/stable/>`_?
+如果你希望对Elasticsearch做基准测试，那么Rally适合你。它能够帮助你完成下面这些任务：
 
-You want to benchmark Elasticsearch? Then Rally is for you. It can help you with the following tasks:
+* 为基准测试安装和卸载Elasticsearch集群
+* 管理基准测试的数据以及可以支持多个Elasticsearch版本
+* 运行基准测试并且记录结果
+* 用附加遥测设备的方式找出性能问题（Finding performance problems by attaching so-called telemetry devices）
+* 比较性能结果
 
-* Setup and teardown of an Elasticsearch cluster for benchmarking
-* Management of benchmark data and specifications even across Elasticsearch versions
-* Running benchmarks and recording results
-* Finding performance problems by attaching so-called telemetry devices
-* Comparing performance results
+为了让基准测试的数据具有可重复性，我们在Rally上付出了相当大的努力。
 
-We have also put considerable effort in Rally to ensure that benchmarking data are reproducible.
-
-Getting Help or Contributing to Rally
+获取帮助和为Rally作贡献
 -------------------------------------
 
 Use our `Discuss forum <https://discuss.elastic.co/c/elasticsearch/rally>`_ to provide feedback or ask questions about Rally. Please see our `contribution guide <https://github.com/elastic/rally/blob/master/CONTRIBUTING.md>`_ on guidelines for contributors.
 
-Source Code
+源代码
 -----------
 
-Rally's source code is available on `Github <https://github.com/elastic/rally>`_.
+Rally的源代码托管在 `Github <https://github.com/elastic/rally>`_ 上.
 
-Contents
+目录
 --------
 
 .. toctree::
@@ -52,8 +52,8 @@ Contents
    faq
    glossary
 
-License
--------
+许可证
+-------------
 
 This software is licensed under the Apache License, version 2 ("ALv2"), quoted below.
 
