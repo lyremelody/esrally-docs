@@ -1,10 +1,15 @@
 Rally |release|
 ===============
 
+注意
+------------------------------------
+
+这个是esrally官方文档的翻译，原文请移步 `Rally 官方文档 <http://esrally.readthedocs.io/en/latest/>`_
+
 
 .. ifconfig:: release.endswith('.dev0')
 
-    .. warning::
+    .. 警告::
         
         这个是Rally当前开发版文档。
         你可以看看 `最新稳定版文档 <//esrally.readthedocs.io/en/stable/>`_?
@@ -19,10 +24,10 @@ Rally |release|
 
 为了让基准测试的数据具有可重复性，我们在Rally上付出了相当大的努力。
 
-获取帮助和为Rally作贡献
+获取帮助和为Rally投稿
 -------------------------------------
 
-Use our `Discuss forum <https://discuss.elastic.co/c/elasticsearch/rally>`_ to provide feedback or ask questions about Rally. Please see our `contribution guide <https://github.com/elastic/rally/blob/master/CONTRIBUTING.md>`_ on guidelines for contributors.
+使用我们的 `讨论论坛 <https://discuss.elastic.co/c/elasticsearch/rally>`_ 提问和提供关于Rally的反馈。投稿者请参考 `投稿指南 <https://github.com/elastic/rally/blob/master/CONTRIBUTING.md>`_ 
 
 源代码
 -----------
