@@ -1,14 +1,6 @@
 Rally |release|
 ===============
 
-注意
-------------------------------------
-
-这个是esrally官方文档的翻译，原文请移步 `Rally 官方文档 <http://esrally.readthedocs.io/en/latest/>`_
-
-如果发现有翻译上的问题，可邮件给我 lyremelody AT 163 dot com。谢谢～
-
-
 .. ifconfig:: release.endswith('.dev0')
 
     .. 警告::
@@ -77,3 +69,12 @@ distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
 WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations under
 the License.
+
+
+注意
+------------------------------------
+
+这个是esrally官方文档的翻译，原文请移步 `Rally 官方文档 <http://esrally.readthedocs.io/en/latest/>`_
+
+如果发现有翻译上的问题，可邮件给我 lyremelody AT 163 dot com。谢谢～
+
