@@ -23,7 +23,7 @@ templates_path = ['_templates']
 # source_suffix = ['.rst', '.md']
 source_suffix = '.rst'
 master_doc = 'index'
-language = None
+language = 'zh_CN'
 
 year = date.today().year
 

@@ -6,30 +6,30 @@ Rally |release|
 
     .. warning::
         
-        Õâ¸öÊÇRallyµ±Ç°¿ª·¢°æÎÄµµ¡£
-        Äã¿ÉÒÔ¿´¿´ `×îĞÂÎÈ¶¨°æÎÄµµ <//esrally.readthedocs.io/en/stable/>`_?
+        è¿™ä¸ªæ˜¯Rallyå½“å‰å¼€å‘ç‰ˆæ–‡æ¡£ã€‚
+        ä½ å¯ä»¥çœ‹çœ‹ `æœ€æ–°ç¨³å®šç‰ˆæ–‡æ¡£ <//esrally.readthedocs.io/en/stable/>`_?
 
-Èç¹ûÄãÏ£Íû¶ÔElasticsearch×ö»ù×¼²âÊÔ£¬ÄÇÃ´RallyÊÊºÏÄã¡£ËüÄÜ¹»°ïÖúÄãÍê³ÉÏÂÃæÕâĞ©ÈÎÎñ£º
+å¦‚æœä½ å¸Œæœ›å¯¹ElasticsearchåšåŸºå‡†æµ‹è¯•ï¼Œé‚£ä¹ˆRallyé€‚åˆä½ ã€‚å®ƒèƒ½å¤Ÿå¸®åŠ©ä½ å®Œæˆä¸‹é¢è¿™äº›ä»»åŠ¡ï¼š
 
-* Îª»ù×¼²âÊÔ°²×°ºÍĞ¶ÔØElasticsearch¼¯Èº
-* ¹ÜÀí»ù×¼²âÊÔµÄÊı¾İÒÔ¼°¿ÉÒÔÖ§³Ö¶à¸öElasticsearch°æ±¾
-* ÔËĞĞ»ù×¼²âÊÔ²¢ÇÒ¼ÇÂ¼½á¹û
-* ÓÃ¸½¼ÓÒ£²âÉè±¸µÄ·½Ê½ÕÒ³öĞÔÄÜÎÊÌâ£¨Finding performance problems by attaching so-called telemetry devices£©
-* ±È½ÏĞÔÄÜ½á¹û
+* ä¸ºåŸºå‡†æµ‹è¯•å®‰è£…å’Œå¸è½½Elasticsearché›†ç¾¤
+* ç®¡ç†åŸºå‡†æµ‹è¯•çš„æ•°æ®ä»¥åŠå¯ä»¥æ”¯æŒå¤šä¸ªElasticsearchç‰ˆæœ¬
+* è¿è¡ŒåŸºå‡†æµ‹è¯•å¹¶ä¸”è®°å½•ç»“æœ
+* ç”¨é™„åŠ é¥æµ‹è®¾å¤‡çš„æ–¹å¼æ‰¾å‡ºæ€§èƒ½é—®é¢˜ï¼ˆFinding performance problems by attaching so-called telemetry devicesï¼‰
+* æ¯”è¾ƒæ€§èƒ½ç»“æœ
 
-ÎªÁËÈÃ»ù×¼²âÊÔµÄÊı¾İ¾ßÓĞ¿ÉÖØ¸´ĞÔ£¬ÎÒÃÇÔÚRallyÉÏ¸¶³öÁËÏàµ±´óµÄÅ¬Á¦¡£
+ä¸ºäº†è®©åŸºå‡†æµ‹è¯•çš„æ•°æ®å…·æœ‰å¯é‡å¤æ€§ï¼Œæˆ‘ä»¬åœ¨Rallyä¸Šä»˜å‡ºäº†ç›¸å½“å¤§çš„åŠªåŠ›ã€‚
 
-»ñÈ¡°ïÖúºÍÎªRally×÷¹±Ï×
+è·å–å¸®åŠ©å’Œä¸ºRallyä½œè´¡çŒ®
 -------------------------------------
 
 Use our `Discuss forum <https://discuss.elastic.co/c/elasticsearch/rally>`_ to provide feedback or ask questions about Rally. Please see our `contribution guide <https://github.com/elastic/rally/blob/master/CONTRIBUTING.md>`_ on guidelines for contributors.
 
-Ô´´úÂë
+æºä»£ç 
 -----------
 
-RallyµÄÔ´´úÂëÍĞ¹ÜÔÚ `Github <https://github.com/elastic/rally>`_ ÉÏ.
+Rallyçš„æºä»£ç æ‰˜ç®¡åœ¨ `Github <https://github.com/elastic/rally>`_ ä¸Š.
 
-Ä¿Â¼
+ç›®å½•
 --------
 
 .. toctree::
@@ -52,7 +52,7 @@ RallyµÄÔ´´úÂëÍĞ¹ÜÔÚ `Github <https://github.com/elastic/rally>`_ ÉÏ.
    faq
    glossary
 
-Ğí¿ÉÖ¤
+è®¸å¯è¯
 -------------
 
 This software is licensed under the Apache License, version 2 ("ALv2"), quoted below.
