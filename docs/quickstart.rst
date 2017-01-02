@@ -1,31 +1,30 @@
-Quickstart
+快速入门
 ==========
 
-Install
+安装
 -------
 
-Install Python 3.4+ including ``pip3``, JDK 8 and git 1.9+. Then run the following command, optionally prefixed by ``sudo`` if necessary::
+安装Python 3.4+和 ``pip3``, JDK 8 和git 1.9+。然后执行下面的命令，如果需要的话在前面加上 ``sudo``::
 
     pip3 install esrally
 
+如果你有任何困难或者需要更多细节的说明，请看 :doc:`详细安装指南</install>`
 
-If you have any trouble or need more detailed instructions, please look in the :doc:`detailed installation guide </install>`.
-
-Configure
+配置
 ---------
 
 Just invoke ``esrally configure``.
 
-For more detailed instructions and a detailed walkthrough see the :doc:`configuration guide </configuration>`.
+更详细的说明和详细的演练参考 :doc:`配置指南 </configuration>`
 
-Run your first race
+执行你的第一个race
 -------------------
 
-Now we're ready to run our first race::
+现在准备执行我们的第一个race::
 
     esrally --distribution-version=5.0.0
 
-This will download Elasticsearch 5.0.0 and run Rally's default track against it. After the race, a summary report is written to the command line:::
+这个操作会下载Elasticsearch 5.0.0，然后执行Rally的默认track。执行完成后，会在命令行产生一个总结报告::
 
     ------------------------------------------------------
         _______             __   _____
@@ -86,10 +85,10 @@ This will download Elasticsearch 5.0.0 and run Rally's default track against it.
     ----------------------------------
 
 
-Next steps
+下一步
 ----------
 
-Now you can check :doc:`how to run benchmarks </race>` or :doc:`how to define your own benchmarks </adding_tracks>`.
+现在你可以查看 :doc:`怎样执行基准测试 </race>` 或者 :doc:`怎样定义你自己的基准测试 </adding_tracks>`
 
-Also run ``esrally --help`` to see what options are available and keep the :doc:`command line reference </command_line_reference>` handy for more detailed explanations of each option.
+还可以通过执行 ``esrally --help`` 来查看可用的选项，查看 :doc:`命令行参考</command_line_reference>` 以获得每个参数的更多细节解释。
 
