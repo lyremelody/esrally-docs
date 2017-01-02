@@ -10,9 +10,9 @@ track例子
 
 让我们来一步步创建一个track的例子。首先，我们需要一些数据。有很多有趣的可以做新基准测试的公开数据集，我们也有 `储备可添加的基准测试数据 <https://github.com/elastic/rally-tracks/issues>`_ 。
 
-`Geonames <http://www.geonames.org/>`_ 提供地址数据，基于 `creative commons 许可证 <http://creativecommons.org/licenses/by/3.0/>`_ 。我们将下载 `allCountries.zip <http://download.geonames.org/export/dump/allCountries.zip>`_ (约300MB)，解压，检查生成的 ``allCountries.txt`` 文件。
+`Geonames <http://www.geonames.org/>`_ 提供地理数据，基于 `creative commons 许可证 <http://creativecommons.org/licenses/by/3.0/>`_ 。我们将下载 `allCountries.zip <http://download.geonames.org/export/dump/allCountries.zip>`_ (约300MB)，解压，检查生成的 ``allCountries.txt`` 文件。
 
-你很快会发现 ``allCountries.txt`` 这个文件是通过制表符分隔的，但是我们JSON格式的数据以通过bulk-index API导入到Elasticsearch。我门可以通过一个小脚本来做个转换::
+你很快会发现 ``allCountries.txt`` 这个文件是通过制表符分隔的，但是我们需要JSON格式的数据以通过bulk-index API导入到Elasticsearch。我门可以通过一个小脚本来做个转换::
 
     import json
     import csv
@@ -140,8 +140,8 @@ track代码库是用git管理的，所以通过执行 ``git checkout master`` �
 
 有几件事情要注意:
 
-* Rally 假设 the challenge需要按默认的方式（“append-no-conflicts”）执行。如果你希望执行不同的challenge，需要提供命令行参数``--challenge=YOUR_CHALLENGE_NAME`` 。
-* 你可以随意添加查询动作。我们基于`官方Python Elasticsearch client <http://elasticsearch-py.readthedocs.org/>`_ 来实现查询。
+* Rally 假设 the challenge 需要按默认的方式（“append-no-conflicts”）执行。如果你希望执行不同的challenge，需要提供命令行参数 ``--challenge=YOUR_CHALLENGE_NAME`` 。
+* 你可以随意添加查询动作。我们基于 `官方Python Elasticsearch client <http://elasticsearch-py.readthedocs.org/>`_ 来实现查询。
 * ``types`` 属性下面的数字需要是整形的，用于提供报告进度。
 
 .. note::
@@ -164,9 +164,9 @@ track代码库是用git管理的，所以通过执行 ``git checkout master`` �
     ----------  --------------------------------------------------------  -------------------
     geonames    Standard benchmark in Rally (8.6M POIs from Geonames)     append-no-conflicts
 
-Congratulations, you have created your first track! You can test it with ``esrally --track=geonames --offline`` (or whatever the name of your track is) and run specific challenges with ``esrally --track=geonames --challenge=append-fast-with-conflicts --offline``.
+恭喜你，你已经创建了你的第一个track！你可以通过调用 ``esrally --track=geonames --offline`` 来测试（可以把“geonames”换成你的track名称），可以通过调用 ``esrally --track=geonames --challenge=append-fast-with-conflicts --offline`` 来运行某个指定的challenges。
 
-If you want to share your track with the community, please read on.
+如果你希望向社区共享你的track，请继续读下去。
 
 How to contribute a track
 -------------------------
