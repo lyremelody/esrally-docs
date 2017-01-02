@@ -1,19 +1,18 @@
-Creating custom tracks
+创建定制的tracks
 ======================
 
 .. note::
-    Please see the :doc:`track reference </track>` for more information on the structure of a track.
+    查看 :doc:`track参考 </track>` 以获取track结构更多信息
 
 
-Example track
+track例子
 -------------
 
-Let's create an example track step by step. First of all, we need some data. There are a lot of public data sets available which are interesting for new benchmarks and we also have a
-`backlog of benchmarks to add <https://github.com/elastic/rally-tracks/issues>`_.
+让我们来一步步创建一个track的例子。首先，我们需要一些数据。有很多有趣的可以做新基准测试的公开数据集，我们也有 `储备可添加的基准测试数据 <https://github.com/elastic/rally-tracks/issues>`_ 。
 
-`Geonames <http://www.geonames.org/>`_ provides geo data under a `creative commons license <http://creativecommons.org/licenses/by/3.0/>`_. We will download `allCountries.zip <http://download.geonames.org/export/dump/allCountries.zip>`_ (around 300MB), extract it and inspect ``allCountries.txt``.
+`Geonames <http://www.geonames.org/>`_ 提供地址数据，基于 `creative commons 许可证 <http://creativecommons.org/licenses/by/3.0/>`_ 。我们将下载 `allCountries.zip <http://download.geonames.org/export/dump/allCountries.zip>`_ (约300MB)，解压，检查生成的 ``allCountries.txt`` 文件。
 
-You will note that the file is tab-delimited but we need JSON to bulk-index data with Elasticsearch. So we can use a small script to do the conversion for us::
+你很快会发现 ``allCountries.txt`` 这个文件是通过制表符分隔的，但是我们JSON格式的数据以通过bulk-index API导入到Elasticsearch。我门可以通过一个小脚本来做个转换::
 
     import json
     import csv
@@ -56,15 +55,16 @@ You will note that the file is tab-delimited but we need JSON to bulk-index data
     
        print(json.dumps(d))
 
-We can invoke the script with ``python3 toJSON.py > documents.json``.
 
-Next we need to compress the JSON file with ``bzip2 -9 -c documents.json > documents.json.bz2``. Upload the data file to a place where it is publicly available. We choose ``http://benchmarks.elastic.co/corpora/geonames`` for this example.
+我们可以这样调用脚本生成JSON文件 ``python3 toJSON.py > documents.json`` 。
 
-For initial local testing you can place the data file in Rally's data directory, which is located in ``~/.rally/benchmarks/data``. For this example you need to place the data for the "geonames" track in ``~/.rally/benchmarks/data/geonames`` so Rally can pick it up. Additionally, you have to specify the ``--offline`` option when running Rally so it does not try to download any benchmark data.
+下一步我们需要压缩这个JSON文件 ``bzip2 -9 -c documents.json > documents.json.bz2`` 。把这个数据文件上传到一个公开有效的地方。在这个例子中，我们选择放在 ``http://benchmarks.elastic.co/corpora/geonames``
 
-Next we need a mapping file for our documents. For details on how to write a mapping file, see `the Elasticsearch documentation on mappings <https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html>`_ and look at the `example mapping file <https://github.com/elastic/rally-tracks/blob/master/geonames/mappings.json>`_. Place the mapping file in your ``rally-tracks`` repository in a dedicated folder. This repository is located in ``~/.rally/benchmarks/tracks/default`` and we place the mapping file in ``~/.rally/benchmarks/tracks/default/geonames`` for this track.
+对于初始局部测试，你可以把这个数据文件放在Rally的数据目录，``~/.rally/benchmarks/data`` 路径下。在这个例子中，为了让Rally能够找到，你需要将这个针对“geonames” track的数据文件放在 ``~/.rally/benchmarks/data/geonames`` 。另外，在运行Rally的时候，为了避免Rally尝试下载其他基准测试数据，你需要指定 ``--offline`` 参数。
 
-The track repository is managed by git, so ensure that you are on the ``master`` branch by running ``git checkout master``. Then add a new JSON file right next to the mapping file. The file has to be called "track.json" and is the actual track specification ::
+下一步我们需要为上面的文档写一个映射信息文件（mapping file）。关于怎么写一个映射信息文件，参考 `the Elasticsearch documentation on mappings <https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html>`_ 和 `example mapping file <https://github.com/elastic/rally-tracks/blob/master/geonames/mappings.json>`_ 。将这个映射信息文件提交到你的 ``rally-tracks`` 代码库一个专用的目录里。这个代码库存放在 ``~/.rally/benchmarks/tracks/default`` ，将这个映射信息文件放在 ``~/.rally/benchmarks/tracks/default/geonames`` 。
+
+track代码库是用git管理的，所以通过执行 ``git checkout master`` 来确保是使用的主线。然后在映射信息文件同级添加一个新的JSON文件，这个文件名为 “track.json”，下面是实际的规范／说明 ::
 
     {
       "meta": {
@@ -136,19 +136,19 @@ The track repository is managed by git, so ensure that you are on the ``master``
       ]
     }
 
-Finally, you need to commit your changes: ``git commit -a -m "Add geonames track"``.
+最后，你需要提交你的变更：``git commit -a -m "Add geonames track"`` 。
 
-A few things to note:
+有几件事情要注意:
 
-* Rally assumes that the challenge that should be run by default is called "append-no-conflicts". If you want to run a different challenge, provide the command line option ``--challenge=YOUR_CHALLENGE_NAME``.
-* You can add as many queries as you want. We use the `official Python Elasticsearch client <http://elasticsearch-py.readthedocs.org/>`_ to issue queries.
-* The numbers below the ``types`` property are needed to verify integrity and provide progress reports.
+* Rally 假设 the challenge需要按默认的方式（“append-no-conflicts”）执行。如果你希望执行不同的challenge，需要提供命令行参数``--challenge=YOUR_CHALLENGE_NAME`` 。
+* 你可以随意添加查询动作。我们基于`官方Python Elasticsearch client <http://elasticsearch-py.readthedocs.org/>`_ 来实现查询。
+* ``types`` 属性下面的数字需要是整形的，用于提供报告进度。
 
 .. note::
 
     We have defined a `JSON schema for tracks <https://github.com/elastic/rally/blob/master/esrally/resources/track-schema.json>`_ which you can use to check how to define your track. You should also check the tracks provided by Rally for inspiration.
 
-When you invoke ``esrally list tracks``, the new track should now appear::
+当你调用 ``esrally list tracks``, 新的track就会显示出来::
 
     dm@io:~ $ esrally list tracks
     
