@@ -6,6 +6,8 @@ Rally |release|
 
 这个是esrally官方文档的翻译，原文请移步 `Rally 官方文档 <http://esrally.readthedocs.io/en/latest/>`_
 
+如果发现有翻译上的问题，可邮件给我 lyremelody AT 163 dot com。谢谢～
+
 
 .. ifconfig:: release.endswith('.dev0')
 
