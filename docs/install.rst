@@ -36,10 +36,10 @@ Non-sudo安装
 
 如果你不想用 ``sudo`` ，也是可行的，只是稍微复杂一点：
 
-1. Specify the ``--user`` option when installing Rally (step 2 above), so the command to be issued is: ``python3 setup.py develop --user``.
-2. Check the output of the install script or lookup the `Python documentation on the variable site.USER_BASE <https://docs.python.org/3.5/library/site.html#site.USER_BASE>`_ to find out where the script is located. On Linux, this is typically ``~/.local/bin``.
+1. 在安装Rally（上面的步骤）的时候指定参数 ``--user`` ，所以执行的命令是：``python3 setup.py develop --user`` 。
+2. 检查安装脚本的输出，或者查看 `Python documentation on the variable site.USER_BASE <https://docs.python.org/3.5/library/site.html#site.USER_BASE>`_ 找到脚本（译注：这里的脚本指的应该是 ``esrally`` ）的位置。在Linux下，通常在 ``~/.local/bin`` 。
 
-You can now either add ``~/.local/bin`` to your path or invoke Rally via ``~/.local/bin/esrally`` instead of just ``esrally``.
+你可以添加 ``~/.local/bin`` 到PATH路径中，或者直接调用 ``~/.local/bin/esrally`` 来使用esrally。
 
 VirtualEnv安装
 ~~~~~~~~~~~~~~~~~~
