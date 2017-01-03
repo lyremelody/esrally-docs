@@ -179,16 +179,16 @@ If you want to contribute your track, follow these steps:
 2. Upload the associated data so they can be publicly downloaded via HTTP. The data should be compressed either as .bz2 (recommended) or as .zip.
 3. Create a pull request in the `rally-tracks Github repo <https://github.com/elastic/rally-tracks>`_.
 
-Advanced topics
+高级话题
 ---------------
 
-Template Language
+模版语言
 ^^^^^^^^^^^^^^^^^
 
 Rally uses `Jinja2 <http://jinja.pocoo.org/docs/dev/>`_ as template language. This allows you to use Jinja2 expressions in track files.
 
 
-Extension Points
+扩展点
 """"""""""""""""
 
 Rally also provides a few extension points to Jinja2:
@@ -217,7 +217,7 @@ You can find an example in the logging track::
 
 The data set that is used in the logging track starts on 26-04-1998 but we want to ignore the first few days for this query, so we start on 15-05-1998. The expression ``{{'15-05-1998' | days_ago(now)}}`` yields the difference in days between now and the fixed start date and allows us to benchmark time range queries relative to now with a predetermined data set.
 
-Custom parameter sources
+自定义参数来源
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
