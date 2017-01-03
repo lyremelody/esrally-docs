@@ -1,7 +1,7 @@
 Cars
 ====
 
-A rally "car" is a specific configuration of Elasticsearch. At the moment, Rally ships with a fixed set of cars that you cannot change. You can list them with ``esrally list cars``::
+"car"在Rally中，是指某个指定的Elasticsearch配置。目前，Rally有一套固定的“cars”，不能改变（译注：car不能改，但是可以修改指定其中的某个来用）。你可以通过调用 ``esrally list cars`` 获取列表::
 
         ____        ____
        / __ \____ _/ / /_  __
@@ -19,4 +19,4 @@ A rally "car" is a specific configuration of Elasticsearch. At the moment, Rally
     two_nodes
     verbose_iw
 
-You can specify the car that Rally should use with e.g. ``--car=4gheap``.
+你可以通过参数 ``--car=4gheap`` 来指定car。
