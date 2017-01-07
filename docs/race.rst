@@ -1,4 +1,4 @@
-Running Races
+运行Races
 =============
 
 A "race" in Rally is the execution of a benchmarking experiment. You can use different data sets (which we call :doc:`tracks </track>`) for your benchmarks.
