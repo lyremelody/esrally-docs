@@ -7,7 +7,7 @@ Rally |release|
     .. warning::
         
         这个是Rally当前开发版文档。
-        你可以看看 `最新稳定版文档 <https://esrally.readthedocs.io/en/stable/>`_ ?
+        你可以看看 `最新稳定版文档 <https://esrally.readthedocs.io/en/stable/>`_
 
 
 如果你希望对Elasticsearch做基准测试，那么Rally适合你。它能够帮助你完成下面这些任务：
