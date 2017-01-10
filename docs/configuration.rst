@@ -34,10 +34,10 @@ Rally能够从源代码或者 `官方发布的二进制版本 <https://www.elast
 
       esrally configure --advanced-config
 
-    [鉁揮 Autodetecting available third-party software
-      git    : [鉁揮
-      gradle : [鉁揮
-      JDK 8  : [鉁揮
+    [✓] Autodetecting available third-party software
+      git    : [✓] 
+      gradle : [✓] 
+      JDK 8  : [✓] 
 
     [鉁揮 Setting up benchmark data directory in [/Users/dm/.rally/benchmarks] (needs several GB).
 
@@ -56,10 +56,10 @@ Rally能够从源代码或者 `官方发布的二进制版本 <https://www.elast
 
       esrally configure --advanced-config
 
-    [鉁揮 Autodetecting available third-party software
-      git    : [鉁揮
-      gradle : [鉁昡
-      JDK 8  : [鉁揮
+    [✓] Autodetecting available third-party software
+      git    : [✓] 
+      gradle : [✕]
+      JDK 8  : [✓] 
 
     **********************************************************************************
     You don't have the necessary software to benchmark source builds of Elasticsearch.
@@ -75,11 +75,11 @@ Rally可能不能自动找到你的JDK 8 home目录。如果是这样，它会�
 
 在初始化检测之后，Rally会自动检测你的Elasticsearch项目目录（在当前目录或者在 ``../elasticsearch`` ）。如果一些正常，你会看到这些::
 
-    [鉁揮 Autodetected Elasticsearch project directory at [/Users/dm/elasticsearch].
+    [✓] Autodetected Elasticsearch project directory at [/Users/dm/elasticsearch].
 
 否则，Rally会选择一个默认目录并且提示你确认::
 
-    [鉁揮 Setting up benchmark data directory in [/Users/dm/.rally/benchmarks] (needs several GB).
+    [✓] Setting up benchmark data directory in [/Users/dm/.rally/benchmarks] (needs several GB).
     Enter your Elasticsearch project directory: [default: '/Users/dm/.rally/benchmarks/src']:
 
 如果你觉得这个默认值可以，那么按回车键（“Enter”），Rally会办好剩余的事情。否则，你需要在这提供你的Elasticsearch项目目录。请记住，当你启动了一个基准测试，Rally将会在这个目录使用Gradle启动构建。
@@ -88,7 +88,7 @@ Rally可能不能自动找到你的JDK 8 home目录。如果是这样，它会�
 
 Rally配置完成::
 
-    [鉁揮 Configuration successfully written to [/Users/dm/.rally/rally.ini]. Happy benchmarking!
+    [✓] Configuration successfully written to [/Users/dm/.rally/rally.ini]. Happy benchmarking!
 
     To benchmark the latest version of Elasticsearch with the default benchmark run:
 
