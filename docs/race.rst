@@ -1,42 +1,46 @@
-运行Races
-=============
+Run a Benchmark: Races
+======================
 
-“race” 在Rally中是指一个基准测试的执行。你可以使用不同的数据集（我们称为 :doc:`tracks </track>` ）来做基准测试。
+Definition
+----------
 
-获取Tracks列表
---------------------
+A "race" in Rally is the execution of a benchmarking experiment. You can choose different benchmarking scenarios (called :doc:`tracks </track>`) for your benchmarks.
 
-开始获取有效的tracks::
+List Tracks
+-----------
+
+Start by finding out which tracks are available::
 
     esrally list tracks
 
-这样会显示下面的列表::
+This will show the following list::
 
-    Name        Description                                                           Challenges
-    ----------  --------------------------------------------------------------------  ------------------------------------------------------------------------------------------------------
-    geonames    Standard benchmark in Rally (8.6M POIs from Geonames)                 append-no-conflicts,append-no-conflicts-index-only,append-fast-no-conflicts,append-fast-with-conflicts
-    geopoint    60.8M POIs from PlanetOSM                                             append-no-conflicts,append-no-conflicts-index-only,append-fast-no-conflicts,append-fast-with-conflicts
-    logging     Logging benchmark                                                     append-no-conflicts,append-no-conflicts-index-only,append-fast-no-conflicts,append-fast-with-conflicts
-    nyc_taxis   Trip records completed in yellow and green taxis in New York in 2015  append-no-conflicts,append-no-conflicts-index-only
-    percolator  Percolator benchmark based on 2M AOL queries                          append-no-conflicts
-    pmc         Full text benchmark containing 574.199 papers from PMC                append-no-conflicts,append-no-conflicts-index-only,append-fast-no-conflicts,append-fast-with-conflicts
-    tiny        First 2k documents of the geonames track for local tests              append-no-conflicts,append-no-conflicts-index-only,append-fast-no-conflicts,append-fast-with-conflicts
+    Name        Description                                          Documents  Compressed Size    Uncompressed Size    Default Challenge        All Challenges
+    ----------  -------------------------------------------------  -----------  -----------------  -------------------  -----------------------  ---------------------------
+    geonames    POIs from Geonames                                    11396505  252.4 MB           3.3 GB               append-no-conflicts      append-no-conflicts,appe...
+    geopoint    Point coordinates from PlanetOSM                      60844404  481.9 MB           2.3 GB               append-no-conflicts      append-no-conflicts,appe...
+    http_logs   HTTP server log data                                 247249096  1.2 GB             31.1 GB              append-no-conflicts      append-no-conflicts,appe...
+    nested      StackOverflow Q&A stored as nested docs               11203029  663.1 MB           3.4 GB               nested-search-challenge  nested-search-challenge,...
+    noaa        Global daily weather measurements from NOAA           33659481  947.3 MB           9.0 GB               append-no-conflicts      append-no-conflicts,appe...
+    nyc_taxis   Taxi rides in New York in 2015                       165346692  4.5 GB             74.3 GB              append-no-conflicts      append-no-conflicts,appe...
+    percolator  Percolator benchmark based on AOL queries              2000000  102.7 kB           104.9 MB             append-no-conflicts      append-no-conflicts,appe...
+    pmc         Full text benchmark with academic papers from PMC       574199  5.5 GB             21.7 GB              append-no-conflicts      append-no-conflicts,appe...
 
-前两列显示track的名称和简短描述。一个track指定一个或多个challenges（challeges定义会被运行的操作）
+The first two columns show the name and a description of each track. A track also specifies one or more challenges which describe the workload to run.
 
-开始运行一个race
----------------------
+Starting a Race
+---------------
 
 .. note::
-    不要使用root用户运行Rally，因为Elasticsearch不允许以root运行。
+    Do not run Rally as root as Elasticsearch will refuse to start with root privileges.
 
-运行race，你需要定义要运行的track和challenge。例如::
+To start a race you have to define the track and challenge to run. For example::
 
-    esrally --distribution-version=5.0.0 --track=geopoint --challenge=append-fast-with-conflicts
+    esrally --distribution-version=6.0.0 --track=geopoint --challenge=append-fast-with-conflicts
 
-Rally开始基于指定的track运行基准测试。如果你之前没有启动过Rally，输出会与下面的内容相似::
+Rally will then start racing on this track. If you have never started Rally before, it should look similar to the following output::
 
-    dm@io:~ $ esrally --distribution-version=5.0.0 --track=geopoint --challenge=append-fast-with-conflicts
+    dm@io:~ $ esrally --distribution-version=6.0.0 --track=geopoint --challenge=append-fast-with-conflicts
 
         ____        ____
        / __ \____ _/ / /_  __
@@ -45,8 +49,8 @@ Rally开始基于指定的track运行基准测试。如果你之前没有启动�
     /_/ |_|\__,_/_/_/\__, /
                     /____/
 
-    [INFO] Racing on track [geopoint], challenge [append-fast-with-conflicts] and car [defaults]
-    [INFO] Downloading Elasticsearch 5.0.0 ... [OK]
+    [INFO] Racing on track [geopoint], challenge [append-fast-with-conflicts] and car ['defaults'] with version [6.0.0].
+    [INFO] Downloading Elasticsearch 6.0.0 ... [OK]
     [INFO] Rally will delete the benchmark candidate after the benchmark
     [INFO] Downloading data from [http://benchmarks.elasticsearch.org.s3.amazonaws.com/corpora/geopoint/documents.json.bz2] (482 MB) to [/Users/dm/.rally/benchmarks/data/geopoint/documents.json.bz2] ... [OK]
     [INFO] Decompressing track data from [/Users/dm/.rally/benchmarks/data/geopoint/documents.json.bz2] to [/Users/dm/.rally/benchmarks/data/geopoint/documents.json] (resulting size: 2.28 GB) ... [OK]
@@ -54,11 +58,11 @@ Rally开始基于指定的track运行基准测试。如果你之前没有启动�
     Running index-update                                                           [  0% done]
 
 
-请耐心等待基准测试运行完，它需要一些时间。
+Please be patient as it will take a while to run the benchmark.
 
-当测试运行完，Rally会在命令行显示一个测试总结::
+When the race has finished, Rally will show a summary on the command line::
 
-    |                          Metric |    Operation |     Value |   Unit |
+    |                          Metric |         Task |     Value |   Unit |
     |--------------------------------:|-------------:|----------:|-------:|
     |                   Indexing time |              |   124.712 |    min |
     |                      Merge time |              |   21.8604 |    min |
@@ -103,15 +107,15 @@ Rally开始基于指定的track运行基准测试。如果你之前没有启动�
 
 
 .. note::
-    你可以指定参数 ``--report-file=/path/to/your/report.md`` 来将结果报告保存在一个文件里，或者通过指定参数 ``--report-format=csv`` 将报告结果保存在CSV文件中
+    You can save this report also to a file by using ``--report-file=/path/to/your/report.md`` and save it as CSV with ``--report-format=csv``.
 
-Rally究竟做了什么？
+What did Rally just do?
 
-* 它下载并启动Elasticsearch 5.0.0
-* 它下载geopoint track的相关数据
-* 它执行了真实的基准测试
-* 最后它提供了结果报告
+* It downloaded and started Elasticsearch 6.0.0
+* It downloaded the relevant data for the geopoint track
+* It ran the actual benchmark
+* And finally it reported the results
 
-如果你对Rally执行的操作比较关心，请查看 `geopoint track specification <https://github.com/elastic/rally-tracks/blob/5/geopoint/track.json>`_ 或者 :doc:`创建你自己的tracks </adding_tracks>` 。你可以配置Rally :doc:`store all data samples in Elasticsearch </configuration>` ，从而可以在Kibana中分析结果。最后，你可能会想 :doc:`修改（用于基准测试的）Elasticsearch的配置 </car>`
+If you are curious about the operations that Rally has run, please inspect the `geopoint track specification <https://github.com/elastic/rally-tracks/blob/5/geopoint/track.json>`_ or start to :doc:`write your own tracks </adding_tracks>`. You can also configure Rally to :doc:`store all data samples in Elasticsearch </configuration>` so you can analyze the results with Kibana. Finally, you may want to :doc:`change the Elasticsearch configuration </car>`.
 
 

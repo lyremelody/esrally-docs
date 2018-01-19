@@ -1,4 +1,4 @@
-Frequently Asked Questions (FAQ)
+常见问题解答 (FAQ)
 ================================
 
 A benchmark aborts with ``Couldn't find a tar.gz distribution``. What's the problem?

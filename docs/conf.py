@@ -23,7 +23,7 @@ templates_path = ['_templates']
 # source_suffix = ['.rst', '.md']
 source_suffix = '.rst'
 master_doc = 'index'
-language = 'zh_CN'
+language = None
 
 year = date.today().year
 
@@ -35,8 +35,8 @@ rst_prolog = '''
 
 # General information about the project.
 project = "Rally"
-copyright = "%i, lyremelody" % year
-author = "lyremelody"
+copyright = "%i, Daniel Mitterdorfer" % year
+author = "Daniel Mitterdorfer"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -124,7 +124,7 @@ latex_elements = {}
 
 latex_documents = [
     (master_doc, 'Rally.tex', 'Rally Documentation',
-     'lyremelody', 'manual'),
+     'Daniel Mitterdorfer', 'manual'),
 ]
 
 # -- Options for manual page output ---------------------------------------

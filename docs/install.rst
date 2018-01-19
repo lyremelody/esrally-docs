@@ -1,59 +1,167 @@
-安装
-------------
+Installation
+============
 
-这是Rally的详细安装指南。如果你赶时间，你可以去看看 :doc:`快速入门 </quickstart>` 。
+This is the detailed installation guide for Rally. If you are in a hurry you can check the :doc:`quickstart guide </quickstart>`.
 
-先决条件
-~~~~~~~~~~~~~
+Prerequisites
+-------------
 
-在开始安装Rally前，请确定已经安装下面这些包：
+Rally does not support Windows and is only actively tested on MacOS and Linux. Before installing Rally, please ensure that the following packages are installed.
 
-* Python 3.4 或者 `python3` （通过 ``python3 --version`` 验证，应该打印 ``Python 3.4.0`` 或更高版本 ）
-* ``pip3`` 在PATH中（通过 ``pip3 --version`` 验证）
-* JDK 8
-* git 1.9 或更高版本
+Python
+~~~~~~
 
-Rally不支持Windows，只在Mac OS X和Linux上测试过。
+* Python 3.4 or better available as `python3` on the path. Verify with: ``python3 --version``.
+* Python3 header files (included in the Python3 development package).
+* ``pip3`` available on the path. Verify with ``pip3 --version``.
+
+**Debian / Ubuntu**
+
+::
+
+    sudo apt-get install gcc python3-pip python3-dev
+
+
+**RHEL 6/ CentOS 6**
+
+*Tested on CentOS release 6.9 (Final).*
 
 .. note::
 
-   如果你使用RHEL，请通过 `Red Hat Software Collections <https://www.softwarecollections.org/en/scls/rhscl/git19/>`_ 确定安装了最新的git。
+    You will need to enable `EPEL <https://fedoraproject.org/wiki/EPEL>`_ before.
+
+::
+
+    sudo yum install -y gcc python34.x86_64 python34-devel.x86_64 python34-setuptools.noarch
+    # installs pip as it is not available as an OS package
+    sudo python3 /usr/lib/python3.4/site-packages/easy_install.py pip
 
 
-安装Rally
-~~~~~~~~~~~~~~~~
-
-使用pip进行安装，很简单：``pip3 install esrally``
+**RHEL 7 / CentOS 7**
 
 .. note::
 
-   根据你的系统对于软件安装的要求，你可能会要使用 ``sudo``
+    You will need to enable `EPEL <https://fedoraproject.org/wiki/EPEL>`_ before.
 
-如果在安装过程中出错，可能是在安装 ``psutil`` 出错，我们使用 ``psutil`` 来收集系统参数比如CPU利用率。这种情况，需要看看 `installation instructions of psutil <https://github.com/giampaolo/psutil/blob/master/INSTALL.rst>`_ 。记住Rally是基于Python 3的，你需要安装Python 3相关头文件，而不是Python 2的。
+*Tested on CentOS Linux release 7.4.1708 (Core).*
 
-Non-sudo安装
-~~~~~~~~~~~~~~~~
+::
 
-如果你不想用 ``sudo`` ，也是可行的，只是稍微复杂一点：
+    sudo yum install -y gcc python34.x86_64 python34-devel.x86_64 python34-pip.noarch
 
-1. 在安装Rally（上面的步骤）的时候指定参数 ``--user`` ，所以执行的命令是：``python3 setup.py develop --user`` 。
-2. 检查安装脚本的输出，或者查看 `Python documentation on the variable site.USER_BASE <https://docs.python.org/3.5/library/site.html#site.USER_BASE>`_ 找到脚本（译注：这里的脚本指的应该是 ``esrally`` ）的位置。在Linux下，通常在 ``~/.local/bin`` 。
+**Amazon Linux**
 
-你可以添加 ``~/.local/bin`` 到PATH路径中，或者直接调用 ``~/.local/bin/esrally`` 来使用esrally。
+::
 
-VirtualEnv安装
-~~~~~~~~~~~~~~~~~~
+    sudo yum install -y gcc python35-pip.noarch python35-devel.x86_64
 
-你也可以使用Virtualenv来安装Rally到一个隔离的环境，而不用使用sudo。
+**MacOS**
 
-1. 使用 ``virtualenv --python=python3`` 安装一个新virtualenv环境到一个目录
-2. 使用 ``/path/to/virtualenv/dir/bin/activate`` 激活这个virtualenv环境
-3. 使用 ``pip install esrally`` 安装Rally
+We recommend that you use `Homebrew <https://brew.sh/>`_::
 
-当你要使用Rally时，先运行激活脚本（上面第2步）。当你使用完Rally，在Shell中执行 ``deactivate``  来退出虚拟环境。
+    brew install python3
+
+git
+~~~
+
+``git 1.9`` or better is required. Verify with ``git --version``.
+
+**Debian / Ubuntu**
+
+::
+
+    sudo apt-get install git
 
 
-下一步
-~~~~~~~~~~
+**Red Hat / CentOS / Amazon Linux**
 
-当你安装完成，你还需要配置它。执行 ``esrally configure`` 或者参考 :doc:`配置帮助 </configuration>`
+::
+
+    sudo yum install git
+
+
+.. note::
+
+   If you use RHEL, please ensure to install a recent version of git via the `Red Hat Software Collections <https://www.softwarecollections.org/en/scls/rhscl/git19/>`_.
+
+**MacOS**
+
+``git`` is already installed on MacOS.
+
+JDK
+~~~
+
+A JDK is required on all machines where you want to launch Elasticsearch. If you use Rally just as a load generator, no JDK is required.
+
+We recommend to use Oracle JDK but you are free to use OpenJDK as well. For details on how to install a JDK, please see your operating system's documentation pages.
+
+
+.. note::
+
+   If you have Rally download, install and benchmark a local copy of Elasticsearch (i.e., the `default Rally behavior <http://esrally.readthedocs.io/en/stable/quickstart.html#run-your-first-race>`_) be sure to configure the Operating System (OS) of your Rally server with the `recommended kernel settings <https://www.elastic.co/guide/en/elasticsearch/reference/master/system-config.html>`_
+
+Installing Rally
+----------------
+
+Simply install Rally with pip: ``pip3 install esrally``
+
+.. note::
+
+   Depending on your system setup you may need to prepend this command with ``sudo``.
+
+If you get errors during installation, it is probably due to the installation of ``psutil`` which we use to gather system metrics like CPU utilization. Please ensure that you have installed the Python development package as documented in the prerequisites section above.
+
+Non-sudo Install
+----------------
+
+If you don't want to use ``sudo`` when installing Rally, installation is still possible but a little more involved:
+
+1. Specify the ``--user`` option when installing Rally (step 2 above), so the command to be issued is: ``python3 setup.py develop --user``.
+2. Check the output of the install script or lookup the `Python documentation on the variable site.USER_BASE <https://docs.python.org/3.5/library/site.html#site.USER_BASE>`_ to find out where the script is located. On Linux, this is typically ``~/.local/bin``.
+
+You can now either add ``~/.local/bin`` to your path or invoke Rally via ``~/.local/bin/esrally`` instead of just ``esrally``.
+
+VirtualEnv Install
+------------------
+
+You can also use Virtualenv to install Rally into an isolated Python environment without sudo.
+
+1. Set up a new virtualenv environment in a directory with ``virtualenv --python=python3 .``
+2. Activate the environment with ``source /path/to/virtualenv/dir/bin/activate``
+3. Install Rally with ``pip install esrally``
+
+Whenever you want to use Rally, run the activation script (step 2 above) first.  When you are done, simply execute ``deactivate`` in the shell to exit the virtual environment.
+
+.. _install_offline-install:
+
+Kubernetes Job
+--------------
+
+You can run Rally as a Kubernetes `Job <https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/>`_ via `this <https://github.com/gdmello/elasticsearch-rally>`_ `Helm Chart <https://helm.sh/>`_.
+
+Docker
+------
+
+You can run Rally as a docker container too. Follow the instructions `here <https://github.com/gdmello/elasticsearch-rally/tree/master/docker>`_.
+
+Offline Install
+---------------
+
+.. ifconfig:: release.endswith('.dev0')
+
+    .. warning::
+
+        This documentation is for the version of Rally currently under development. We do not provide offline installation packages for development versions.
+        Were you looking for the `documentation of the latest stable version <//esrally.readthedocs.io/en/stable/>`_?
+
+If you are in a corporate environment where your servers do not have any access to the Internet, you can use Rally's offline installation package. Follow these steps to install Rally:
+
+1. Install all prerequisites as documented above.
+2. Download the offline installation package for the `latest release <https://github.com/elastic/rally/releases/latest>`_ and copy it to the target machine(s).
+3. Decompress the installation package with ``tar -xzf esrally-dist-*.tar.gz``.
+4. Run the install script with ``sudo ./esrally-dist-*/install.sh``.
+
+Next Steps
+----------
+
+After you have installed Rally, you need to configure it. Just run ``esrally configure`` or follow the :doc:`configuration help page </configuration>` for more guidance.

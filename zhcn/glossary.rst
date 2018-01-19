@@ -1,4 +1,4 @@
-Glossary
+词汇表
 ========
 
 .. glossary::

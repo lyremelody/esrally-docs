@@ -1,4 +1,4 @@
-Developing Rally
+Rally开发
 ================
 
 Prerequisites

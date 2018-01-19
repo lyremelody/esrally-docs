@@ -1,11 +1,19 @@
-Tournaments
-===========
+Compare Results: Tournaments
+============================
 
-.. warning::
+Suppose, we want to analyze the impact of a performance improvement.
 
-   If you want to use tournaments, then Rally requires a dedicated metrics store as it needs to store data across multiple races. So ensure to run ``esrally configure --advanced-config`` first. For details please see the :doc:`configuration help page </configuration>`.
+First, we need a baseline measurement. For example::
 
-Suppose, we want to analyze the impact of a performance improvement. First, we need a baseline measurement. We can use the command line parameter ``--user-tag`` to provide a key-value pair to document the intent of a race. After we've run both races, we want to know about the performance impact of a change. With Rally we can analyze differences of two given races easily. First of all, we need to find two races to compare by issuing ``esrally list races``::
+    esrally --track=pmc --revision=latest --user-tag="intention:baseline_github_1234"
+
+Above we run the baseline measurement based on the latest source code revision of Elasticsearch. We can use the command line parameter ``--user-tag`` to provide a key-value pair to document the intent of a race.
+
+Then we implement our changes and finally we want to run another benchmark to see the performance impact of the change. In that case, we do not want Rally to change our source tree and thus specify the pseudo-revision ``current``::
+
+    esrally --track=pmc --revision=current --user-tag="intention:reduce_alloc_1234"
+
+After we've run both races, we want to know about the performance impact. With Rally we can analyze differences of two given races easily. First of all, we need to find two races to compare by issuing ``esrally list races``::
 
     dm@io:~ $ esrally list races
 
@@ -17,11 +25,11 @@ Suppose, we want to analyze the impact of a performance improvement. First, we n
                     /____/
     Recent races:
 
-    Race Timestamp    Track    Challenge            Car       User Tag
-    ----------------  -------  -------------------  --------  ------------------------------
-    20160518T122341Z  pmc      append-no-conflicts  defaults  intention:reduce_alloc_1234
-    20160518T112057Z  pmc      append-no-conflicts  defaults  intention:baseline_github_1234
-    20160518T101957Z  pmc      append-no-conflicts  defaults
+    Race Timestamp    Track    Track Parameters   Challenge            Car       User Tag
+    ----------------  -------  ------------------ -------------------  --------  ------------------------------
+    20160518T122341Z  pmc                         append-no-conflicts  defaults  intention:reduce_alloc_1234
+    20160518T112057Z  pmc                         append-no-conflicts  defaults  intention:baseline_github_1234
+    20160518T101957Z  pmc                         append-no-conflicts  defaults
 
 
 We can see that the user tag helps us to recognize races. We want to compare the two most recent races and have to provide the two race timestamps in the next step::

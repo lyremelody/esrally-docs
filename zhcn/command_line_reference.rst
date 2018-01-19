@@ -1,4 +1,4 @@
-Command Line Reference
+命令行参考
 ======================
 
 You can control Rally with subcommands and command line flags:

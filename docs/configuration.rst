@@ -1,25 +1,20 @@
-配置
+Configuration
 =============
 
-Rally已经配置为安装即用。如果你在安装完Rally后，运行 ``esrally`` ，它会检查配置是否存在，然后问你一些问题（以完成配置）。
+Rally has to be configured once after installation. If you just run ``esrally`` after installing Rally, it will detect that the configuration file is missing and asks you a few questions.
 
-如果你后面需要重新配置Rally，只需要重新执行 ``esrally configure`` 。
+If you want to reconfigure Rally at any later time, just run ``esrally configure`` again.
 
-.. note::
-
-   如果执行过程中出现这个错误 ``UnicodeEncodeError: 'ascii' codec can't encode character``，请将你的shell配置支持UTF-8编码。你可以通过执行 ``locale`` 来检查当前环境否是UTF-8编码。如果还有问题，那么添加环境变量设置 ``export LC_ALL=en_US.UTF-8`` 到你的shell初始化文件中（如果使用Bash，那么shell初始化文件是 ``~/.bashrc`` ），然后重新登录。
-
-
-简单配置
+Simple Configuration
 --------------------
 
-Rally默认会运行一个简单的配置程序，并且自动检测更多的默认配置供你选择。如果你需要更多的控制Rally配置，你可以执行 ``esrally configure --advanced-config`` 。
+By default, Rally will run a simpler configuration routine and autodetect as much settings as possible or choose defaults for you. If you need more control you can run Rally with ``esrally configure --advanced-config``.
 
-Rally能够从源代码或者 `官方发布的二进制版本 <https://www.elastic.co/downloads/elasticsearch>`_ 构建Elasticsearch。如果你需要用Rally从源代码构建Elasticsearch，只能使用Elasticsearch 5.0及以上版本。因为Elasticsearh 5.0的构建工具由Maven换成了Gradle。Rally只支持Gradle，所以限制了只能用（源代码构建）Elasticsearch 5.0及以上版本。
+Rally can build Elasticsearch either from sources or use an `official binary distribution <https://www.elastic.co/downloads/elasticsearch>`_. If you have Rally build Elasticsearch from sources, it can only be used to benchmark Elasticsearch 5.0 and above. The reason is that with Elasticsearch 5.0 the build tool was switched from Maven to Gradle. As Rally only supports Gradle, it is limited to Elasticsearch 5.0 and above.
 
-如果你想从源代码构建Elasticsearch，在运行配置程序之前需要安装Gradle 2.13。
+If you want to build Elasticsearch from sources, Gradle needs to be installed prior to running the configuration routine.
 
-我们来一步步的运行一个例子：首先运行 ``esrally``::
+Let's go through an example step by step: First run ``esrally``::
 
     dm@io:~ $ esrally
 
@@ -34,15 +29,14 @@ Rally能够从源代码或者 `官方发布的二进制版本 <https://www.elast
 
       esrally configure --advanced-config
 
-    [✓] Autodetecting available third-party software
-      git    : [✓] 
-      gradle : [✓] 
-      JDK 8  : [✓] 
+    * Autodetecting available third-party software
+      git    : [OK]
+      gradle : [OK]
+      JDK    : [OK]
 
-    [鉁揮 Setting up benchmark data directory in [/Users/dm/.rally/benchmarks] (needs several GB).
+    * Setting up benchmark data directory in /Users/dm/.rally/benchmarks
 
-
-当你看到上面这些，Rally自动检测了git，Gradle和JDK 8是否已经安装。如果你没有安装Gradle，也没关系，只是不能从源代码构建Elasticsearch而已。我们假设没安装Gradle::
+As you can see above, Rally autodetects if git, Gradle and a JDK are installed. If you don't have Gradle, that's no problem, you are just not able to build Elasticsearch from sources. Let's assume you don't have Gradle installed::
 
     dm@io:~ $ esrally
 
@@ -50,90 +44,91 @@ Rally能够从源代码或者 `官方发布的二进制版本 <https://www.elast
        / __ \____ _/ / /_  __
       / /_/ / __ `/ / / / / /
      / _, _/ /_/ / / / /_/ /
-    /_/ |_|\__,_/_/_/\__, / /____/
+    /_/ |_|\__,_/_/_/\__, /
+                    /____/
 
     Running simple configuration. You can run the advanced configuration with:
 
       esrally configure --advanced-config
 
-    [✓] Autodetecting available third-party software
-      git    : [✓] 
-      gradle : [✕]
-      JDK 8  : [✓] 
+    * Autodetecting available third-party software
+      git    : [OK]
+      gradle : [MISSING]
+      JDK 8  : [OK]
 
-    **********************************************************************************
-    You don't have the necessary software to benchmark source builds of Elasticsearch.
+    ********************************************************************************
+    You don't have the required software to benchmark Elasticsearch source builds.
 
     You can still benchmark binary distributions with e.g.:
 
       esrally --distribution-version=5.0.0
-    **********************************************************************************
+    ********************************************************************************
 
-正如你所看到的，Rally告诉你，你不能从源代码构建Elasticsearch，但是你仍然可以使用官方发布的二进制版本做基准测试。
+As you can see, Rally tells you that you cannot build Elasticsearch from sources but you can still benchmark official binary distributions.
 
-Rally可能不能自动找到你的JDK 8 home目录。如果是这样，它会在后面的配置过程中问你。
+It's also possible that Rally cannot automatically find your JDK 8 or JDK 9 home directory. In that case, it will ask you later in the configuration process. If you do not provide a JDK home directory, Rally cannot start Elasticsearch on this machine but you can still use it as a load generator to :doc:`benchmark remote clusters </recipes>`.
 
-在初始化检测之后，Rally会自动检测你的Elasticsearch项目目录（在当前目录或者在 ``../elasticsearch`` ）。如果一些正常，你会看到这些::
+After running the initial detection, Rally will try to autodetect your Elasticsearch project directory (either in the current directory or in ``../elasticsearch``) or will choose a default directory::
 
-    [✓] Autodetected Elasticsearch project directory at [/Users/dm/elasticsearch].
+    * Setting up benchmark data directory in /Users/dm/.rally/benchmarks
+    * Setting up benchmark source directory in /Users/dm/.rally/benchmarks/src/elasticsearch
 
-否则，Rally会选择一个默认目录并且提示你确认::
+If Rally has not found Gradle in the first step, it will not ask you for a source directory and just go on.
 
-    [✓] Setting up benchmark data directory in [/Users/dm/.rally/benchmarks] (needs several GB).
-    Enter your Elasticsearch project directory: [default: '/Users/dm/.rally/benchmarks/src']:
+Now Rally is done::
 
-如果你觉得这个默认值可以，那么按回车键（“Enter”），Rally会办好剩余的事情。否则，你需要在这提供你的Elasticsearch项目目录。请记住，当你启动了一个基准测试，Rally将会在这个目录使用Gradle启动构建。
+    Configuration successfully written to /Users/dm/.rally/rally.ini. Happy benchmarking!
 
-如果Rally在第一步没有找到Gradle，它不会问你要源代码目录，而是会跳过继续。
+    To benchmark Elasticsearch with the default benchmark, run:
 
-Rally配置完成::
+      esrally
 
-    [✓] Configuration successfully written to [/Users/dm/.rally/rally.ini]. Happy benchmarking!
+    More info about Rally:
 
-    To benchmark the latest version of Elasticsearch with the default benchmark run:
+    * Type esrally --help
+    * Read the documentation at https://esrally.readthedocs.io/en/latest/
+    * Ask a question on the forum at https://discuss.elastic.co/c/elasticsearch/rally
 
-      esrally --revision=latest
+Congratulations! Time to :doc:`run your first benchmark </race>`.
 
-    For more help see the user documentation at https://esrally.readthedocs.io
-
-恭喜你！可以运行你的第一个基准测试了。
-
-高级配置
+Advanced Configuration
 ----------------------
 
-如果你需要通过一些变量来控制更多或者希望使用更高级的功能，比如 :doc:`tournaments </tournament>` ，那么你需要执行高级配置程序。你可以在任何时候调用 ``esrally configure --advanced-config`` 。
+If you need more control over a few variables or want to store your metrics in a dedicated Elasticsearch metrics store, then you should run the advanced configuration routine. You can invoke it at any time with ``esrally configure --advanced-config``.
 
-先决条件
+Prerequisites
 ~~~~~~~~~~~~~
 
-当使用高级配置时，Rally会把它的指标（metrics）存储到一个专用的Elasticsearch实例中，而不是存在内存里。因此，你需要安装下面这些软件:
+When using the advanced configuration, you can choose that Rally stores its metrics not in-memory but in a dedicated Elasticsearch instance. Therefore, you will also need the following software installed:
 
-* Elasticsearch：作为Rally指标存储的专用Elasticsearch实例。如果你不希望自己设置，你也可以使用 `Elastic Cloud <https://www.elastic.co/cloud>`_ 。
-* 可选：Kibana（也包含在 `Elastic Cloud <https://www.elastic.co/cloud>`_ ）。
+* Elasticsearch: a dedicated Elasticsearch instance which acts as the metrics store for Rally. If you don't want to set it up yourself you can also use `Elastic Cloud <https://www.elastic.co/cloud>`_.
+* Optional: Kibana (also included in `Elastic Cloud <https://www.elastic.co/cloud>`_).
 
-准备工作
+Preparation
 ~~~~~~~~~~~
 
-首先 `安装Elasticsearch <https://www.elastic.co/downloads/elasticsearch>`_ 2.3或更高版本。安装一个节点的版本就可以了。Rally使用这个实例存储指标数据。它自己会创建必要的索引库。配置过程会问你要这个（Elasticsearch）集群的主机和端口信息。
+First `install Elasticsearch <https://www.elastic.co/downloads/elasticsearch>`_ 5.0 or higher. A simple out-of-the-box installation with a single node will suffice. Rally uses this instance to store metrics data. It will setup the necessary indices by itself. The configuration procedure of Rally will you ask for host and port of this cluster.
 
 .. note::
 
-   Rally会选择 39200-39300 (HTTP) 和 39300-39400 (transport) 的端口范围来做集群的基准测试。所以请确定这些端口没有被占用。
+   Rally will choose the port range 39200-39300 (HTTP) and 39300-39400 (transport) for the benchmark cluster, so please ensure that this port range is not used by the metrics store.
 
-可选但是推荐安装 `Kibana <https://www.elastic.co/downloads/kibana>`_ 。注意Rally不会自动配置Kibana。
+Optional but recommended is to install also `Kibana <https://www.elastic.co/downloads/kibana>`_. However, note that Kibana will not be auto-configured by Rally.
 
-配置选项
+Configuration Options
 ~~~~~~~~~~~~~~~~~~~~~
 
-Rally在高级配置中会问你一些东西：
+Rally will ask you a few more things in the advanced setup:
 
-* Elasticsearch项目目录：这是Elasticsearch源代码所在的目录。如果你不开发Elasticsearch，默认配置就行了。如果你需要对本地修改的代码做基准测试，那么你就需要指定你的开发项目目录了。注意，Rally会在这个目录执行构建（它会运行 ``gradle clean`` 和 ``gradle :distribution:tar:assemble`` ）。
-* JDK 8 根目录：如果Rally自动检测不到JDK 8的home目录，它会问你。填写你需要用的JDK的根目录。
-* 这个基准测试环境的名字：你可以使用同一个指标存储（Elasticsearch实例）用于多个环境（比如本地，持续集成等）。所以你可以通过不同的名字来区分不同的环境。（译注：多个环境共用一个Elasticsearch实例作为存储；一种环境用一个索引库存信息，所以这里的名字应该可以理解为存储环境的指标数据的索引库的名字）
-* 指标存储配置：提供用于存储指标数据的Elasticsearch的详细连接信息。它必须是一个（Elasticsearch）实例，但是它的规模可以很小。一个单节点集群默认配置就可以满足需求。现在还不支持在高级配置中选择内存存储。如果你确实需要，请在Github上提交一个issue。
-* Rally是否要安装Elasticsearch基准测试所有默认需要安装的数据。这会使用很多磁盘空间，你需要定期清理 ``~/.rally/benchmarks/races`` 。
+* **Benchmark data directory**: Rally stores all benchmark related data in this directory which can take up to several tens of GB. If you want to use a dedicated partition, you can specify a different data directory here.
+* **Elasticsearch project directory**: This is the directory where the Elasticsearch sources are located. If you don't actively develop on Elasticsearch you can just leave the default but if you want to benchmark local changes you should point Rally to your project directory. Note that Rally will run builds with Gradle in this directory (it runs ``gradle clean`` and ``gradle :distribution:tar:assemble``).
+* **JDK root directory**: Rally will only ask this if it could not autodetect the JDK home by itself. Just enter the root directory of the JDK you want to use. By default, Rally will choose Java 8 if available and fallback to Java 9.
+* **Metrics store type**: You can choose between ``in-memory`` which requires no additional setup or ``elasticsearch`` which requires that you start a dedicated Elasticsearch instance to store metrics but gives you much more flexibility to analyse results.
+* **Metrics store settings** (only for metrics store type ``elasticsearch``): Provide the connection details to the Elasticsearch metrics store. This should be an instance that you use just for Rally but it can be a rather small one. A single node cluster with default setting should do it.
+* **Name for this benchmark environment** (only for metrics store type ``elasticsearch``): You can use the same metrics store for multiple environments (e.g. local, continuous integration etc.) so you can separate metrics from different environments by choosing a different name.
+* whether or not Rally should keep the Elasticsearch benchmark candidate installation including all data by default. This will use lots of disk space so you should wipe ``~/.rally/benchmarks/races`` regularly.
 
-代理配置
+Proxy Configuration
 -------------------
 
 Rally downloads all necessary data automatically for you:

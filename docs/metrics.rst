@@ -4,7 +4,7 @@ Metrics
 Metrics Records
 ---------------
 
-At the end of a race, Rally stores all metrics records in its metrics store, which is a dedicated Elasticsearch cluster.
+At the end of a race, Rally stores all metrics records in its metrics store, which is a dedicated Elasticsearch cluster. Rally stores the metrics in the indices ``rally-metrics-*``. It will create a new index for each month.
 
 Here is a typical metrics record::
 
@@ -12,6 +12,9 @@ Here is a typical metrics record::
     {
           "environment": "nightly",
           "track": "geonames",
+          "track-params": {
+            "shard-count": 3
+          },
           "challenge": "append-no-conflicts",
           "car": "defaults",
           "sample-type": "normal",
@@ -21,6 +24,7 @@ Here is a typical metrics record::
           "name": "throughput",
           "value": 27385,
           "unit": "docs/s",
+          "task": "index-append-no-conflicts",
           "operation": "index-append-no-conflicts",
           "operation-type": "Index",
           "lap": 1,
@@ -47,10 +51,12 @@ environment
 
 The environment describes the origin of a metric record. You define this value in the initial configuration of Rally. The intention is to clearly separate different benchmarking environments but still allow to store them in the same index.
 
-track, challenge, car
-~~~~~~~~~~~~~~~~~~~~~
+track, track-params, challenge, car
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This is the track, challenge and car for which the metrics record has been produced.
+This is the track, challenge and car for which the metrics record has been produced. If the user has provided track parameters with the command line parameter, ``--track-params``, each of them is listed here too.
+
+If you specify a car with mixins, it will be stored as one string separated with "+", e.g. ``--car="4gheap,ea"`` will be stored as ``4gheap+ea`` in the metrics store in order to simplify querying in Kibana. For more details, please see the :doc:`cars </car>` documentation.
 
 sample-type
 ~~~~~~~~~~~
@@ -77,8 +83,10 @@ name, value, unit
 
 This is the actual metric name and value with an optional unit (counter metrics don't have a unit). Depending on the nature of a metric, it is either sampled periodically by Rally, e.g. the CPU utilization or query latency or just measured once like the final size of the index.
 
-operation, operation-type
-~~~~~~~~~~~~~~~~~~~~~~~~~
+task, operation, operation-type
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+``task`` is the name of the task (as specified in the track file) that ran when this metric has been gathered. Most of the time, this value will be identical to the operation's name but if the same operation is ran multiple times, the task name will be unique whereas the operation may occur multiple times. It will only be set for metrics with name ``latency`` and ``throughput``.
 
 ``operation`` is the name of the operation (as specified in the track file) that ran when this metric has been gathered. It will only be set for metrics with name ``latency`` and ``throughput``.
 
@@ -113,7 +121,7 @@ Rally stores the following metrics:
 
 * ``latency``: Time period between submission of a request and receiving the complete response. It also includes wait time, i.e. the time the request spends waiting until it is ready to be serviced by Elasticsearch.
 * ``service_time`` Time period between start of request processing and receiving the complete response. This metric can easily be mixed up with ``latency`` but does not include waiting time. This is what most load testing tools refer to as "latency" (although it is incorrect).
-* ``throughput``: Number of operations that Elasticsearch can perform within a certain time period, usually per second.
+* ``throughput``: Number of operations that Elasticsearch can perform within a certain time period, usually per second. See the :doc:`track reference </track>` for a definition of what is meant by one "operation" for each operation type.
 * ``merge_parts_total_time_*``: Different merge times as reported by Lucene. Only available if Lucene index writer trace logging is enabled.
 * ``merge_parts_total_docs_*``: See ``merge_parts_total_time_*``
 * ``disk_io_write_bytes``: number of bytes that have been written to disk during the benchmark. On Linux this metric reports only the bytes that have been written by Elasticsearch, on Mac OS X it reports the number of bytes written by all processes.
@@ -131,6 +139,7 @@ Rally stores the following metrics:
 * ``merges_total_time``: Total runtime of merges as reported by the indices stats API. Note that this is not Wall clock time (i.e. if M merge threads ran for N minutes, we will report M * N minutes, not N minutes).
 * ``merges_total_throttled_time``: Total time within merges have been throttled as reported by the indices stats API. Note that this is not Wall clock time.
 * ``indexing_total_time``: Total time used for indexing as reported by the indices stats API. Note that this is not Wall clock time.
+* ``indexing_throttle_time``: Total time that indexing has been throttled as reported by the indices stats API. Note that this is not Wall clock time.
 * ``refresh_total_time``: Total time used for index refresh as reported by the indices stats API. Note that this is not Wall clock time.
 * ``flush_total_time``: Total time used for index flush as reported by the indices stats API. Note that this is not Wall clock time.
 * ``final_index_size_bytes``: Final resulting index size after the benchmark.

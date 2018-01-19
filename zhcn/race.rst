@@ -1,16 +1,16 @@
-Running Races
+运行Races
 =============
 
-A "race" in Rally is the execution of a benchmarking experiment. You can use different data sets (which we call :doc:`tracks </track>`) for your benchmarks.
+“race” 在Rally中是指一个基准测试的执行。你可以使用不同的数据集（我们称为 :doc:`tracks </track>` ）来做基准测试。
 
-List Tracks
------------
+获取Tracks列表
+--------------------
 
-Start by finding out which tracks are available::
+开始获取有效的tracks::
 
     esrally list tracks
 
-This will show the following list::
+这样会显示下面的列表::
 
     Name        Description                                                           Challenges
     ----------  --------------------------------------------------------------------  ------------------------------------------------------------------------------------------------------
@@ -22,19 +22,19 @@ This will show the following list::
     pmc         Full text benchmark containing 574.199 papers from PMC                append-no-conflicts,append-no-conflicts-index-only,append-fast-no-conflicts,append-fast-with-conflicts
     tiny        First 2k documents of the geonames track for local tests              append-no-conflicts,append-no-conflicts-index-only,append-fast-no-conflicts,append-fast-with-conflicts
 
-The first two columns show the name and a short description of each track. A track also specifies one or more challenges which basically defines the operations that will be run.
+前两列显示track的名称和简短描述。一个track指定一个或多个challenges（challeges定义会被运行的操作）
 
-Starting a Race
----------------
+开始运行一个race
+---------------------
 
 .. note::
-    Do not run Rally as root as Elasticsearch will refuse to start with root privileges.
+    不要使用root用户运行Rally，因为Elasticsearch不允许以root运行。
 
-To start a race you have to define the track and challenge to run. For example::
+运行race，你需要定义要运行的track和challenge。例如::
 
     esrally --distribution-version=5.0.0 --track=geopoint --challenge=append-fast-with-conflicts
 
-Rally will then start racing on this track. If you have never started Rally before, it should look similar to the following output::
+Rally开始基于指定的track运行基准测试。如果你之前没有启动过Rally，输出会与下面的内容相似::
 
     dm@io:~ $ esrally --distribution-version=5.0.0 --track=geopoint --challenge=append-fast-with-conflicts
 
@@ -54,9 +54,9 @@ Rally will then start racing on this track. If you have never started Rally befo
     Running index-update                                                           [  0% done]
 
 
-Please be patient as it will take a while to run the benchmark.
+请耐心等待基准测试运行完，它需要一些时间。
 
-When the race has finished, Rally will show a summary on the command line::
+当测试运行完，Rally会在命令行显示一个测试总结::
 
     |                          Metric |    Operation |     Value |   Unit |
     |--------------------------------:|-------------:|----------:|-------:|
@@ -103,15 +103,15 @@ When the race has finished, Rally will show a summary on the command line::
 
 
 .. note::
-    You can save this report also to a file by using ``--report-file=/path/to/your/report.md`` and save it as CSV with ``--report-format=csv``.
+    你可以指定参数 ``--report-file=/path/to/your/report.md`` 来将结果报告保存在一个文件里，或者通过指定参数 ``--report-format=csv`` 将报告结果保存在CSV文件中
 
-What did Rally just do?
+Rally究竟做了什么？
 
-* It downloaded and started Elasticsearch 5.0.0
-* It downloaded the relevant data for the geopoint track
-* It ran the actual benchmark
-* And finally it reported the results
+* 它下载并启动Elasticsearch 5.0.0
+* 它下载geopoint track的相关数据
+* 它执行了真实的基准测试
+* 最后它提供了结果报告
 
-If you are curious about the operations that Rally has run, please inspect the `geopoint track specification <https://github.com/elastic/rally-tracks/blob/5/geopoint/track.json>`_ or start to :doc:`write your own tracks </adding_tracks>`. You can also configure Rally to :doc:`store all data samples in Elasticsearch </configuration>` so you can analyze the results with Kibana. Finally, you may want to :doc:`change the Elasticsearch configuration </car>`.
+如果你对Rally执行的操作比较关心，请查看 `geopoint track specification <https://github.com/elastic/rally-tracks/blob/5/geopoint/track.json>`_ 或者 :doc:`创建你自己的tracks </adding_tracks>` 。你可以配置Rally :doc:`store all data samples in Elasticsearch </configuration>` ，从而可以在Kibana中分析结果。最后，你可能会想 :doc:`修改（用于基准测试的）Elasticsearch的配置 </car>`
 
 
