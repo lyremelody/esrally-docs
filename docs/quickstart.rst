@@ -4,7 +4,7 @@
 安装
 -------
 
-安装Python 3.4+和 ``pip3``, JDK 8或9 和git 1.9+。然后执行下面的命令，如果需要的话在前面加上 ``sudo``::
+安装Python 3.4+和 ``pip3`` ，JDK 8或9 和git 1.9+。然后执行下面的命令，如果需要的话在前面加上 ``sudo``::
 
     pip3 install esrally
 
@@ -88,7 +88,7 @@ Just invoke ``esrally configure``.
 下一步
 ----------
 
-现在你可以查看 :doc:`怎样执行基准测试 </race>` 以了解如何解读 `总结报告 </summary_report>` 中的信息，或者开始 :doc:`定义你自己的基准测试 </adding_tracks>` 。:doc:`tips and tricks </recipes>` 会帮助你了解怎么处理Rally中遇到的具体问题。
+现在你可以查看 :doc:`怎样执行基准测试 </race>` 以了解如何解读 :doc:`总结报告 </summary_report>` 中的信息，或者开始 :doc:`定义你自己的基准测试 </adding_tracks>` 。查看 :doc:`技巧和窍门 </recipes>` 会帮助你了解怎么处理Rally中遇到的具体问题。
 
 还可以通过执行 ``esrally --help`` 来查看可用的选项，查看 :doc:`命令行参考</command_line_reference>` 以获得每个参数的更多细节解释。
 

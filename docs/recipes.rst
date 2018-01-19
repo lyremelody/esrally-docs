@@ -1,4 +1,4 @@
-Tips and Tricks
+ºº«…∫Õ«œ√≈
 ===============
 
 This section covers various tips and tricks when using Rally in a recipe-style fashion.

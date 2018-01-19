@@ -1,4 +1,4 @@
-Summary Report
+总结报告
 ==============
 
 At the end of each :doc:`race </race>`, Rally shows a summary report. Below we'll explain the meaning of each line including a reference to its corresponding :doc:`metrics key </metrics>` which can be helpful if you want to build your own reports in Kibana. Note that not every summary report will show all lines.
