@@ -5,21 +5,35 @@ Rally |release|
 .. ifconfig:: release.endswith('.dev0')
 
     .. warning::
+        
+        这个是Rally当前开发版文档。
+        你可以看看 `最新稳定版文档 <https://esrally.readthedocs.io/en/stable/>`_
 
-        This documentation is for the version of Rally currently under development.
-        Were you looking for the `documentation of the latest stable version <//esrally.readthedocs.io/en/stable/>`_?
 
-You want to benchmark Elasticsearch? Then Rally is for you. It can help you with the following tasks:
+注意
+------------------------------------
 
-* Setup and teardown of an Elasticsearch cluster for benchmarking
-* Management of benchmark data and specifications even across Elasticsearch versions
-* Running benchmarks and recording results
-* Finding performance problems by attaching so-called telemetry devices
-* Comparing performance results
+这个是esrally官方文档的翻译，原文请移步 `Rally 官方文档 <http://esrally.readthedocs.io/en/latest/>`_
 
-We have also put considerable effort in Rally to ensure that benchmarking data are reproducible.
+如果发现有翻译上的问题，可邮件给我 lyremelody AT 163 dot com。谢谢～
 
-In general, Rally works with all versions of Elasticsearch starting from 1.x. :doc:`Benchmarking with plugins </elasticsearch_plugins>` and :ref:`benchmarking source builds <pipelines_from-sources-complete>` will only work from Elasticsearch 5.0 onwards.
+
+Rally |release|
+-----------------
+
+如果你希望对Elasticsearch做基准测试，那么Rally适合你。它能够帮助你完成下面这些任务：
+
+* 为基准测试安装和卸载Elasticsearch集群
+* 管理基准测试的数据以及可以支持多个Elasticsearch版本
+* 运行基准测试并且记录结果
+* 用附加遥测设备的方式找出性能问题（Finding performance problems by attaching so-called telemetry devices）
+* 比较性能结果
+
+
+为了让基准测试的数据具有可重复性，我们在Rally上付出了相当大的努力
+
+通常，Rally能够支持Elasticsearch 1.x及后续所有版本。但 :doc:`使用插件进行基准测试 </elasticsearch_plugins>` 和 :ref:`基于源码构建基准测试  <pipelines_from-sources-complete>` 只支持 Elasticsearch 5.0及后续版本。
+
 
 Getting Help or Contributing to Rally
 -------------------------------------
