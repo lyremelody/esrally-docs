@@ -1,4 +1,4 @@
-¼¼ÇÉÓëÇÏÃÅ
+æŠ€å·§ä¸çªé—¨
 ===============
 
 This section covers various tips and tricks when using Rally in a recipe-style fashion.
