@@ -1,4 +1,4 @@
-对比结果: Tournaments
+Compare Results: Tournaments
 ============================
 
 假设，我们需要分析一个性能改进的影响。
