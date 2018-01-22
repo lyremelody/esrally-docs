@@ -120,7 +120,14 @@ htmlhelp_basename = 'Rallydoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
-latex_elements = {}
+latex_elements = {
+ # Additional stuff for the LaTeX preamble.
+    'preamble': "".join((
+        '\DeclareUnicodeCharacter{00A0}{ }',  # NO-BREAK SPACE
+        '\DeclareUnicodeCharacter{251C}{+}',  # BOX DRAWINGS LIGHT VERTICAL AND RIGHT
+        '\DeclareUnicodeCharacter{2514}{+}',  # BOX DRAWINGS LIGHT UP AND RIGHT
+    )),
+}
 
 latex_documents = [
     (master_doc, 'Rally.tex', 'Rally Documentation',
