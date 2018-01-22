@@ -1,4 +1,4 @@
-Compare Results: Tournaments
+对比结果: Tournaments
 ============================
 
 Suppose, we want to analyze the impact of a performance improvement.
