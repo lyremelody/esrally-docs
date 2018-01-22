@@ -1,21 +1,21 @@
-ÔËĞĞÒ»¸ö»ù×¼²âÊÔ: Races
+è¿è¡Œä¸€ä¸ªåŸºå‡†æµ‹è¯•: Races
 ==================================
 
-Òë×¢£º½¨Òé¿ªÊ¼Ö®Ç°ÏÈ¿´ :doc:`ÊõÓï±í </glossary>`, ¶ÔÕûÌå¸ÅÄîÓĞ¸öÁË½â¡£Ïñ¡°race¡±¡¢¡°track¡±¡¢¡°challenge¡±ÕâĞ©¸ÅÄî£¬ÎÒÔÚÕâ¸ö·­ÒëÖĞ¾¡Á¿±£³ÖÔ­´Ê(²»·­Òë)¡£
+è¯‘æ³¨ï¼šå»ºè®®å¼€å§‹ä¹‹å‰å…ˆçœ‹ :doc:`æœ¯è¯­è¡¨ </glossary>`, å¯¹æ•´ä½“æ¦‚å¿µæœ‰ä¸ªäº†è§£ã€‚åƒâ€œraceâ€ã€â€œtrackâ€ã€â€œchallengeâ€è¿™äº›æ¦‚å¿µï¼Œæˆ‘åœ¨è¿™ä¸ªç¿»è¯‘ä¸­å°½é‡ä¿æŒåŸè¯(ä¸ç¿»è¯‘)ã€‚
 
-¶¨Òå
+å®šä¹‰
 ----------
 
-ÔÚRallyÖĞ£¬Ò»¸ö¡°race¡±ÊÇÒ»´Î»ù×¼²âÊÔÊµÑéµÄÖ´ĞĞ¡£Äã¿ÉÒÔÔÚÄãµÄ»ù×¼²âÊÔÖĞÑ¡Ôñ²»Í¬µÄ»ù×¼²âÊÔ³¡¾°( :doc:`tracks </track>` )
+åœ¨Rallyä¸­ï¼Œä¸€ä¸ªâ€œraceâ€æ˜¯ä¸€æ¬¡åŸºå‡†æµ‹è¯•å®éªŒçš„æ‰§è¡Œã€‚ä½ å¯ä»¥åœ¨ä½ çš„åŸºå‡†æµ‹è¯•ä¸­é€‰æ‹©ä¸åŒçš„åŸºå‡†æµ‹è¯•åœºæ™¯( :doc:`tracks </track>` )
 
 List Tracks
 -----------
 
-´Ó»ñÈ¡¿ÉÓÃµÄtracks¿ªÊ¼::
+ä»è·å–å¯ç”¨çš„trackså¼€å§‹::
 
     esrally list tracks
 
-½«ÏÔÊ¾ÈçÏÂÁĞ±í::
+å°†æ˜¾ç¤ºå¦‚ä¸‹åˆ—è¡¨::
 
     Name        Description                                          Documents  Compressed Size    Uncompressed Size    Default Challenge        All Challenges
     ----------  -------------------------------------------------  -----------  -----------------  -------------------  -----------------------  ---------------------------
@@ -28,19 +28,19 @@ List Tracks
     percolator  Percolator benchmark based on AOL queries              2000000  102.7 kB           104.9 MB             append-no-conflicts      append-no-conflicts,appe...
     pmc         Full text benchmark with academic papers from PMC       574199  5.5 GB             21.7 GB              append-no-conflicts      append-no-conflicts,appe...
 
-Ç°Á½ÁĞÕ¹Ê¾Ã¿¸ö track µÄÃû³ÆºÍÃèÊö¡£Ò»¸ö track »áÖÆ¶¨Ò»¸ö»ò¶à¸ö challenges À´ÃèÊöÒª±»ÔËĞĞµÄ¸ºÔØÈÎÎñ¡£
+å‰ä¸¤åˆ—å±•ç¤ºæ¯ä¸ª track çš„åç§°å’Œæè¿°ã€‚ä¸€ä¸ª track ä¼šåˆ¶å®šä¸€ä¸ªæˆ–å¤šä¸ª challenges æ¥æè¿°è¦è¢«è¿è¡Œçš„è´Ÿè½½ä»»åŠ¡ã€‚
 
-Æô¶¯Ò»¸ö»ù×¼²âÊÔ
+å¯åŠ¨ä¸€ä¸ªåŸºå‡†æµ‹è¯•
 -----------------------
 
 .. note::
-    ²»ÒªÒÔ root ÓÃ»§ÔËĞĞ Rally£¬ÒòÎª Elasticsearch ²»ÄÜÒÔ root È¨ÏŞÆô¶¯¡£
+    ä¸è¦ä»¥ root ç”¨æˆ·è¿è¡Œ Rallyï¼Œå› ä¸º Elasticsearch ä¸èƒ½ä»¥ root æƒé™å¯åŠ¨ã€‚
 
-ÄãĞèÒª¶¨Òå track ºÍ challenge À´Æô¶¯Ò»¸ö»ù×¼²âÊÔ¡£ÀıÈç::
+ä½ éœ€è¦å®šä¹‰ track å’Œ challenge æ¥å¯åŠ¨ä¸€ä¸ªåŸºå‡†æµ‹è¯•ã€‚ä¾‹å¦‚::
 
     esrally --distribution-version=6.0.0 --track=geopoint --challenge=append-fast-with-conflicts
 
-Rally »á»ùÓÚÕâ¸ö track À´ÔËĞĞ»ù×¼²âÊÔ¡£Èç¹ûÄãÖ®Ç°Ã»ÓĞÆô¶¯¹ı Rally£¬Ëü¿ÉÄÜÊÇÀàËÆÈçÏÂµÄÊä³ö::
+Rally ä¼šåŸºäºè¿™ä¸ª track æ¥è¿è¡ŒåŸºå‡†æµ‹è¯•ã€‚å¦‚æœä½ ä¹‹å‰æ²¡æœ‰å¯åŠ¨è¿‡ Rallyï¼Œå®ƒå¯èƒ½æ˜¯ç±»ä¼¼å¦‚ä¸‹çš„è¾“å‡º::
 
     dm@io:~ $ esrally --distribution-version=6.0.0 --track=geopoint --challenge=append-fast-with-conflicts
 
@@ -60,9 +60,9 @@ Rally »á»ùÓÚÕâ¸ö track À´ÔËĞĞ»ù×¼²âÊÔ¡£Èç¹ûÄãÖ®Ç°Ã»ÓĞÆô¶¯¹ı Rally£¬Ëü¿ÉÄÜÊÇÀàËÆÈ
     Running index-update                                                           [  0% done]
 
 
-ÔËĞĞ»ù×¼²âÊÔĞèÒªÒ»¶ÎÊ±¼ä£¬ÇëÄÍĞÄµÈ´ı¡£
+è¿è¡ŒåŸºå‡†æµ‹è¯•éœ€è¦ä¸€æ®µæ—¶é—´ï¼Œè¯·è€å¿ƒç­‰å¾…ã€‚
 
-µ±»ù×¼²âÊÔ½áÊø£¬Rally »áÔÚÃüÁîĞĞÕ¹Ê¾×Ü½á±¨¸æ::
+å½“åŸºå‡†æµ‹è¯•ç»“æŸï¼ŒRally ä¼šåœ¨å‘½ä»¤è¡Œå±•ç¤ºæ€»ç»“æŠ¥å‘Š::
 
     |                          Metric |         Task |     Value |   Unit |
     |--------------------------------:|-------------:|----------:|-------:|
@@ -109,14 +109,14 @@ Rally »á»ùÓÚÕâ¸ö track À´ÔËĞĞ»ù×¼²âÊÔ¡£Èç¹ûÄãÖ®Ç°Ã»ÓĞÆô¶¯¹ı Rally£¬Ëü¿ÉÄÜÊÇÀàËÆÈ
 
 
 .. note::
-    Äã¿ÉÒÔÍ¨¹ıÖ¸¶¨ÃüÁîĞĞ²ÎÊı ``--report-file=/path/to/your/report.md`` À´°Ñ±¨¸æ±£´æµ½ÎÄ¼ş£¬»¹¿ÉÒÔÍ¨¹ıÃüÁîĞĞ²ÎÊı ``--report-format=csv`` ½«±¨¸æ±£´æ³ÉCSV¸ñÊ½¡£
+    ä½ å¯ä»¥é€šè¿‡æŒ‡å®šå‘½ä»¤è¡Œå‚æ•° ``--report-file=/path/to/your/report.md`` æ¥æŠŠæŠ¥å‘Šä¿å­˜åˆ°æ–‡ä»¶ï¼Œè¿˜å¯ä»¥é€šè¿‡å‘½ä»¤è¡Œå‚æ•° ``--report-format=csv`` å°†æŠ¥å‘Šä¿å­˜æˆCSVæ ¼å¼ã€‚
 
-Rally ¸Õ¸Õ×öÁËĞ©Ê²Ã´£¿
+Rally åˆšåˆšåšäº†äº›ä»€ä¹ˆï¼Ÿ
 
-* ËüÏÂÔØºÍÆô¶¯ÁËElasticsearch 6.0.0
-* ËüÏÂÔØÁË geopoint track Ïà¹ØÊı¾İ
-* ËüÔËĞĞÁËÒ»¸öÊµ¼ÊµÄ»ù×¼²âÊÔ
-* ×îºó±¨¸æÁË½á¹û
+* å®ƒä¸‹è½½å’Œå¯åŠ¨äº†Elasticsearch 6.0.0
+* å®ƒä¸‹è½½äº† geopoint track ç›¸å…³æ•°æ®
+* å®ƒè¿è¡Œäº†ä¸€ä¸ªå®é™…çš„åŸºå‡†æµ‹è¯•
+* æœ€åæŠ¥å‘Šäº†ç»“æœ
 
-Èç¹ûÄãºÃÆæ Rally ÔËĞĞµÄ²Ù×÷£¬Çë¿´ `geopoint track ¹æ·¶ <https://github.com/elastic/rally-tracks/blob/5/geopoint/track.json>`_ »òÕß¿ªÊ¼ :doc:`¶¨ÒåÄã×Ô¼ºµÄ»ù×¼²âÊÔ </adding_tracks>` ¡£ÄãÒ²¿ÉÒÔÅäÖÃ Rally :doc:`´æ´¢ËùÓĞÊı¾İµ½Elasticsearch </configuration>` £¬È»ºóÄã¿ÉÒÔÍ¨¹ıKibanaÀ´·ÖÎö½á¹û¡£×îºó£¬Äã¿ÉÄÜÏ£Íû :doc:`ĞŞ¸ÄElasticsearchÅäÖÃ </car>` ¡£
+å¦‚æœä½ å¥½å¥‡ Rally è¿è¡Œçš„æ“ä½œï¼Œè¯·çœ‹ `geopoint track è§„èŒƒ <https://github.com/elastic/rally-tracks/blob/5/geopoint/track.json>`_ æˆ–è€…å¼€å§‹ :doc:`å®šä¹‰ä½ è‡ªå·±çš„åŸºå‡†æµ‹è¯• </adding_tracks>` ã€‚ä½ ä¹Ÿå¯ä»¥é…ç½® Rally :doc:`å­˜å‚¨æ‰€æœ‰æ•°æ®åˆ°Elasticsearch </configuration>` ï¼Œç„¶åä½ å¯ä»¥é€šè¿‡Kibanaæ¥åˆ†æç»“æœã€‚æœ€åï¼Œä½ å¯èƒ½å¸Œæœ› :doc:`ä¿®æ”¹Elasticsearché…ç½® </car>` ã€‚
 
