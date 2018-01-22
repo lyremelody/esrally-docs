@@ -144,7 +144,7 @@ Kubernetes Job
 Docker
 ------
 
-你也可以把 Rally 运行在一个 docker 容器。按照这个说明来做 `here <https://github.com/gdmello/elasticsearch-rally/tree/master/docker>`_ 。
+你也可以把 Rally 运行在一个 docker 容器。按照 `这个说明 <https://github.com/gdmello/elasticsearch-rally/tree/master/docker>`_ 来做。
 
 离线安装
 ---------------
