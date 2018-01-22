@@ -33,7 +33,7 @@
     20160518T101957Z  pmc                         append-no-conflicts  defaults
 
 
-我们可以看到“User Tag”来帮助我们识别基准测试（上面通过 ``--user-tag`` 设置的）。我们希望比较最近两次基准测试，需要提供两次测试的时间戳::
+我们可以看到 User Tag 来帮助我们识别基准测试（上面通过 ``--user-tag`` 设置的）。我们希望比较最近两次基准测试，需要提供两次测试的时间戳::
 
     dm@io:~ $ esrally compare --baseline=20160518T112057Z --contender=20160518T112341Z
 
