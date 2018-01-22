@@ -23,8 +23,8 @@ Rally |release|
 
 如果你希望对Elasticsearch做基准测试，那么Rally适合你。它能够帮助你完成下面这些任务：
 
-* 为基准测试安装和卸载Elasticsearch集群
-* 管理基准测试的数据以及可以支持多个Elasticsearch版本
+* 为基准测试安装和销毁Elasticsearch集群
+* 管理多个Elasticsearch版本基准测试的数据和规格
 * 运行基准测试并且记录结果
 * 用附加遥测设备的方式找出性能问题（Finding performance problems by attaching so-called telemetry devices）
 * 比较性能结果
@@ -35,18 +35,18 @@ Rally |release|
 通常，Rally能够支持Elasticsearch 1.x及后续所有版本。但 :doc:`使用插件进行基准测试 </elasticsearch_plugins>` 和 :ref:`基于源码构建基准测试  <pipelines_from-sources-complete>` 只支持 Elasticsearch 5.0及后续版本。
 
 
-Getting Help or Contributing to Rally
+获取帮助或参与贡献
 -------------------------------------
 
 Use our `Discuss forum <https://discuss.elastic.co/c/elasticsearch/rally>`_ to provide feedback or ask questions about Rally. Please see our `contribution guide <https://github.com/elastic/rally/blob/master/CONTRIBUTING.md>`_ on guidelines for contributors.
 
-Source Code
+源代码
 -----------
 
-Rally's source code is available on `Github <https://github.com/elastic/rally>`_. You can also check the `changelog <https://github.com/elastic/rally/releases>`_ and the `roadmap <https://github.com/elastic/rally/milestones>`_ there.
+Rally 的源代码托管在 `Github <https://github.com/elastic/rally>`_ 。你可以在这查看 `changelog <https://github.com/elastic/rally/releases>`_ 和 `roadmap <https://github.com/elastic/rally/milestones>`_ 。
 
 .. toctree::
-   :caption: Getting Started with Rally
+   :caption: 开始 Elasticsearch Rally 之旅
    :maxdepth: 2
 
    quickstart
@@ -57,14 +57,14 @@ Rally's source code is available on `Github <https://github.com/elastic/rally>`_
    recipes
 
 .. toctree::
-   :caption: Extending Rally
+   :caption: 扩展 Rally
    :maxdepth: 2
 
    adding_tracks
    developing
 
 .. toctree::
-   :caption: Reference Documentation
+   :caption: 参考文档
    :maxdepth: 2
 
    command_line_reference
@@ -79,7 +79,7 @@ Rally's source code is available on `Github <https://github.com/elastic/rally>`_
    summary_report
 
 .. toctree::
-   :caption: Additional Information
+   :caption: 附加信息
    :maxdepth: 2
 
    migrate
