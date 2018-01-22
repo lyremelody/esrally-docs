@@ -3,23 +3,23 @@
 
 This section covers various tips and tricks when using Rally in a recipe-style fashion.
 
-Benchmarking an existing cluster
---------------------------------
+对已存在的Elasticsearch集群做基准测试
+---------------------------------------------
 
 .. warning::
 
-    If you are just getting started with Rally and don't understand how it works, please do NOT run it against any production or production-like cluster. Besides, benchmarks should be executed in a dedicated environment anyway where no additional traffic skews results.
+    如果你刚开始使用 Rally，不了解其中的原理，请不要在任何生产环境或者类生产环境下运行它。另外，基准测试应该在专门的环境中执行，这样不会产生额外的流量偏差。
 
 .. note::
 
-    We assume in this recipe, that Rally is already properly :doc:`configured </configuration>`.
+    我们假设在这个配置中，Rally 已经被正确 :doc:`配置 </configuration>`
 
-Consider the following configuration: You have an existing benchmarking cluster, that consists of three Elasticsearch nodes running on ``10.5.5.10``, ``10.5.5.11``, ``10.5.5.12``. You've setup the cluster yourself and want to benchmark it with Rally. Rally is installed on ``10.5.5.5``.
+考虑以下配置：你有一个做基准测试的集群，由三个 Elasticsearch 节点组成： ``10.5.5.10`` ， ``10.5.5.11`` ， ``10.5.5.12`` 。你已经设置了集群，并且你希望用 Rally 来做基准测试。Rally 安装在 ``10.5.5.5`` 。
 
 .. image:: benchmark_existing.png
    :alt: Sample Benchmarking Scenario
 
-First of all, we need to decide on a track. So, we run ``esrally list tracks``::
+首先，我们需要选择一个 track。运行 ``esrally list tracks``::
 
     Name        Description                                          Documents  Compressed Size    Uncompressed Size    Default Challenge        All Challenges
     ----------  -------------------------------------------------  -----------  -----------------  -------------------  -----------------------  ---------------------------
@@ -32,31 +32,31 @@ First of all, we need to decide on a track. So, we run ``esrally list tracks``::
     percolator  Percolator benchmark based on AOL queries              2000000  102.7 kB           104.9 MB             append-no-conflicts      append-no-conflicts,appe...
     pmc         Full text benchmark with academic papers from PMC       574199  5.5 GB             21.7 GB              append-no-conflicts      append-no-conflicts,appe...
 
-We're interested in a full text benchmark, so we'll choose to run ``pmc``. If you have your own data that you want to use for benchmarks, then please :doc:`create your own track</adding_tracks>` instead; the metrics you'll gather which be representative and much more useful than some default track.
+我们对全文检索基准测试比较感兴趣，所以我们选择运行 ``pmc`` 。如果你有自己的数据集来做基准测试，请参考 :doc:`定义你自己的基准测试 </adding_tracks>` ；你将收集比默认track更有用和代表性的指标数据。
 
-Next, we need to know which machines to target which is easy as we can see that from the diagram above.
+接下来，我们需要知道哪些机器是目标，这很简单，我们可以从上面的图表看出来。
 
-Finally we need to check which :doc:`pipeline </pipelines>` to use. For this case, the ``benchmark-only`` pipeline is suitable as we don't want Rally to provision the cluster for us.
+最后，我们需要检查使用哪个 :doc:`pipeline </pipelines>` 。对于这个例子， ``benchmark-only`` pipeline 是合适的。因为我们不希望 Rally 为我们提供集群。
 
-Now we can invoke Rally::
+现在我们可以运行 Rally 了::
 
     esrally --track=pmc --target-hosts=10.5.5.10:9200,10.5.5.11:9200,10.5.5.12:9200 --pipeline=benchmark-only
 
-If you have `X-Pack Security <https://www.elastic.co/products/x-pack/security>`_  enabled, then you'll also need to specify another parameter to use https and to pass credentials::
+如果你开启了 `X-Pack Security <https://www.elastic.co/products/x-pack/security>`_ ，你还需要指定一些其他的参数来使用 https 和传递证书::
 
     esrally --track=pmc --target-hosts=10.5.5.10:9243,10.5.5.11:9243,10.5.5.12:9243 --pipeline=benchmark-only --client-options="use_ssl:true,verify_certs:true,basic_auth_user:'elastic',basic_auth_password:'changeme'"
 
 .. _recipe_benchmark_remote_cluster:
 
-Benchmarking a remote cluster
+对远程集群做基准测试
 -----------------------------
 
-Contrary to the previous recipe, you want Rally to provision all cluster nodes.
+与前一个配置相反，你希望 Rally 提供所有的集群节点。
 
-We will use the following configuration for the example:
+我们将用下面的配置作为例子：
 
-* You will start Rally on ``10.5.5.5``. We will call this machine the "benchmark coordinator".
-* Your Elasticsearch cluster will consist of two nodes which run on ``10.5.5.10`` and ``10.5.5.11``. We will call these machines the "benchmark candidate"s.
+* 你将在 ``10.5.5.5`` 启动 Rally。我们称这台机器为 "benchmark coordinator" 。
+* 你的 Elasticsearch 集群包含两个节点： ``10.5.5.10`` 和 ``10.5.5.11`` 。我们称这些机器为 "benchmark candidate"s 。
 
 .. image:: benchmark_remote.png
    :alt: Sample Benchmarking Scenario
@@ -67,7 +67,7 @@ We will use the following configuration for the example:
    All ``esrallyd`` nodes form a cluster that communicates via the "benchmark coordinator". For aesthetic reasons we do not show a direct connection between the "benchmark coordinator" and all nodes.
 
 
-To run a benchmark for this scenario follow these steps:
+按照这些步骤来执行这个场景的基准测试：
 
 1. :doc:`Install </install>` and :doc:`configure </configuration>` Rally on all machines. Be sure that the same version is installed on all of them and fully :doc:`configured </configuration>`.
 2. Start the :doc:`Rally daemon </rally_daemon>` on each machine. The Rally daemon allows Rally to communicate with all remote machines. On the benchmark coordinator run ``esrallyd start --node-ip=10.5.5.5 --coordinator-ip=10.5.5.5`` and on the benchmark candidate machines run ``esrallyd start --node-ip=10.5.5.10 --coordinator-ip=10.5.5.5`` and ``esrallyd start --node-ip=10.5.5.11 --coordinator-ip=10.5.5.5`` respectively. The ``--node-ip`` parameter tells Rally the IP of the machine on which it is running. As some machines have more than one network interface, Rally will not attempt to auto-detect the machine IP. The ``--coordinator-ip`` parameter tells Rally the IP of the benchmark coordinator node.
@@ -124,7 +124,7 @@ By default, Rally will generate load on the same machine where you start a bench
    As indicated in the diagram, track data will be downloaded by each load driver machine separately. If you want to avoid that, you can run a benchmark once without distributing the load test driver (i.e. do not specify ``--load-driver-hosts``) and then copy the contents of ``~/.rally/benchmarks/data`` to all load driver machines.
 
 
-Changing the default track repository
+修改默认的 track 仓库
 -------------------------------------
 
 Rally supports multiple track repositories. This allows you for example to have a separate company-internal repository for your own tracks that is separate from `Rally's default track repository <https://github.com/elastic/rally-tracks>`_. However, you always need to define ``--track-repository=my-custom-repository`` which can be cumbersome. If you want to avoid that and want Rally to use your own track repository by default you can just replace the default track repository definition in ``~./rally/rally.ini``. Consider this example::
