@@ -1,15 +1,16 @@
 对比结果: Tournaments
 ============================
 
-Suppose, we want to analyze the impact of a performance improvement.
 
-First, we need a baseline measurement. For example::
+假设，我们需要分析一个性能改进的影响。
+
+首先，我们需要一个基线测量。比如::
 
     esrally --track=pmc --revision=latest --user-tag="intention:baseline_github_1234"
 
-Above we run the baseline measurement based on the latest source code revision of Elasticsearch. We can use the command line parameter ``--user-tag`` to provide a key-value pair to document the intent of a race.
+上面我们基于 Elasticsearch 最新源码做了一次基线测量。我们可以使用命令行参数 ``--user-tag`` 设置一个键值对来记录测试的意图。
 
-Then we implement our changes and finally we want to run another benchmark to see the performance impact of the change. In that case, we do not want Rally to change our source tree and thus specify the pseudo-revision ``current``::
+然后我们实施修改，最后我们希望运行另一个基准测试来看看这些修改对性能的影响。如果是这样，我们不希望 Rally 切换我们的代码树(译注：希望 Rally 使用当前被修改过的代码，不希望使用其他标准版本的代码)，从而我们应该指定伪修订版本 ``current``:: 
 
     esrally --track=pmc --revision=current --user-tag="intention:reduce_alloc_1234"
 
