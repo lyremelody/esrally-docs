@@ -14,7 +14,7 @@
 
     esrally --track=pmc --revision=current --user-tag="intention:reduce_alloc_1234"
 
-After we've run both races, we want to know about the performance impact. With Rally we can analyze differences of two given races easily. First of all, we need to find two races to compare by issuing ``esrally list races``::
+在运行了两个基准测试之后，我们希望知道性能影响。通过 Rally ，我们可以很简单的分析两个基准测试的结果差异。首先，我们需要通过 ``esrally list races`` 来发现我们能够比较的基准测试::
 
     dm@io:~ $ esrally list races
 
@@ -33,7 +33,7 @@ After we've run both races, we want to know about the performance impact. With R
     20160518T101957Z  pmc                         append-no-conflicts  defaults
 
 
-We can see that the user tag helps us to recognize races. We want to compare the two most recent races and have to provide the two race timestamps in the next step::
+我们可以看到“User Tag”来帮助我们识别基准测试（上面通过 ``--user-tag`` 设置的）。我们希望比较最近两次基准测试，需要提供两次测试的时间戳::
 
     dm@io:~ $ esrally compare --baseline=20160518T112057Z --contender=20160518T112341Z
 
