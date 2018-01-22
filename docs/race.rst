@@ -119,4 +119,3 @@ Rally 刚刚做了些什么？
 * 最后报告了结果
 
 如果你好奇 Rally 运行的操作，请看 `geopoint track 规范 <https://github.com/elastic/rally-tracks/blob/5/geopoint/track.json>`_ 或者开始 :doc:`定义你自己的基准测试 </adding_tracks>` 。你也可以配置 Rally :doc:`存储所有数据到Elasticsearch </configuration>` ，然后你可以通过Kibana来分析结果。最后，你可能希望 :doc:`修改Elasticsearch配置 </car>` 。
-
