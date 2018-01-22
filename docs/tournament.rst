@@ -1,19 +1,19 @@
-Compare Results: Tournaments
+瀵规瘮缁撴灉: Tournaments
 ============================
 
-Suppose, we want to analyze the impact of a performance improvement.
+假设，我们需要分析一个性能改进的影响。
 
-First, we need a baseline measurement. For example::
+首先，我们需要一个基线测量。比如::
 
     esrally --track=pmc --revision=latest --user-tag="intention:baseline_github_1234"
 
-Above we run the baseline measurement based on the latest source code revision of Elasticsearch. We can use the command line parameter ``--user-tag`` to provide a key-value pair to document the intent of a race.
+上面我们基于 Elasticsearch 最新源码做了一次基线测量。我们可以使用命令行参数 ``--user-tag`` 设置一个键值对来记录测试的意图。
 
-Then we implement our changes and finally we want to run another benchmark to see the performance impact of the change. In that case, we do not want Rally to change our source tree and thus specify the pseudo-revision ``current``::
+然后我们实施修改，最后我们希望运行另一个基准测试来看看这些修改对性能的影响。如果是这样，我们不希望 Rally 切换我们的代码树(译注：希望 Rally 使用当前被修改过的代码，不希望使用其他标准版本的代码)，从而我们应该指定伪修订版本 ``current``:: 
 
     esrally --track=pmc --revision=current --user-tag="intention:reduce_alloc_1234"
 
-After we've run both races, we want to know about the performance impact. With Rally we can analyze differences of two given races easily. First of all, we need to find two races to compare by issuing ``esrally list races``::
+在运行了两个基准测试之后，我们希望知道性能影响。通过 Rally ，我们可以很简单的分析两个基准测试的结果差异。首先，我们需要通过 ``esrally list races`` 来发现我们能够比较的基准测试::
 
     dm@io:~ $ esrally list races
 
@@ -32,7 +32,7 @@ After we've run both races, we want to know about the performance impact. With R
     20160518T101957Z  pmc                         append-no-conflicts  defaults
 
 
-We can see that the user tag helps us to recognize races. We want to compare the two most recent races and have to provide the two race timestamps in the next step::
+我们可以看到“User Tag”来帮助我们识别基准测试（上面通过 ``--user-tag`` 设置的）。我们希望比较最近两次基准测试，需要提供两次测试的时间戳::
 
     dm@io:~ $ esrally compare --baseline=20160518T112057Z --contender=20160518T112341Z
 
