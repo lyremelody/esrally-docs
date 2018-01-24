@@ -1,28 +1,28 @@
-Offline Usage
+离线使用
 =============
 
-In some corporate environments servers do not have Internet access. You can still use Rally in such environments and this page summarizes all information that you need to get started.
+在某些企业环境中，服务无法访问互联网。你仍然可以在这样的环境中使用Rally，本页总结了你需要的所有信息。
 
-Installation and Configuration
+安装和配置
 ------------------------------
 
-We provide a special offline installation package. Please refer to the :ref:`offline installation guide <install_offline-install>` for detailed instructions. After the installation you can just follow the normal :doc:`configuration procedure </configuration>`.
+我们提供了一个特殊的离线安装包。详细说明参考 :ref:`离线安装向导 <install_offline-install>` 。在安装后，你可以按照正常的 :doc:`配置程序 </configuration>` 来操作。
 
-Command Line Usage
+命令行使用
 ------------------
 
-Rally will automatically detect upon startup that no Internet connection is available and print the following warning::
+Rally 启动时会自动检测到没有互联网连接可用，并打印以下警告::
 
     [WARNING] No Internet connection detected. Automatic download of track data sets etc. is disabled.
 
-It detects this by trying to connect to ``github.com``. If you want to disable this probing you can explicitly specify ``--offline``.
+它通过尝试连接 ``github.com`` 来检测(互联网是否可用)。你可以通过明确指定 ``--offline`` 来禁用这个(检测)。
 
-Using tracks
+使用 tracks
 ------------
 
-A Rally track describes a benchmarking scenario. You can either write your own tracks or use the tracks that Rally provides out of the box. In the former case, Rally will work just fine in an offline environment. In the latter case, Rally would normally download the track and its associated data from the Internet. If you want to use one of Rally's standard tracks in offline mode, you need to download all relevant files first on a machine that has Internet access and copy it to the target machine(s).
+一个 Rally track 描述一个基准测试场景。你可以写自己的 track 或者使用 Rally 提供的 track。对于前者，Rally 将只提供一个离线环境。对于后者，Rally 将会正常的从互联网下载 track 和它关联的数据。如果你想要在离线环境使用 Rally 的某个标准 track，你需要先在能访问互联网的机器上下载所有相关文件，并拷贝到目标机器上。
 
-Use the `download script <https://raw.githubusercontent.com/elastic/rally-tracks/master/download.sh>`_ to download all data for a track on a machine that has access to the Internet. Example::
+在能访问互联网的机器上，使用 `下载脚本 <https://raw.githubusercontent.com/elastic/rally-tracks/master/download.sh>`_ 下载某个 track 的所有数据。例如::
 
     # downloads the script from Github
     curl -O https://raw.githubusercontent.com/elastic/rally-tracks/master/download.sh
@@ -30,23 +30,23 @@ Use the `download script <https://raw.githubusercontent.com/elastic/rally-tracks
     # download all data for the geonames track
     ./download.sh geonames
 
-This will download all data for the geonames track and create a tar file ``rally-track-data-geonames.tar`` in the current directory. Copy this file to the home directory of the user which will execute Rally on the target machine (e.g. ``/home/rally-user``).
+这样会下载 geonames track 所有数据，并在当前目录生成一个压缩文件 ``rally-track-data-geonames.tar`` 。把该文件复制到将在目标机器上执行 Rally 的用户的 Home 目录。(比如 ``/home/rally-user``) 。
 
-On the target machine, run::
+在目标机器执行::
 
     cd ~
     tar -xf rally-track-data-geonames.tar
 
-The download script does not require a Rally installation on the machine with Internet access but assumes that ``git`` and ``curl`` are available.
+下载脚本不需要在具有互联网访问权限的计算机上安装 Rally，但要求可以使用 ``git`` 和 ``curl`` 。
 
-After you've copied the data, you can list the available tracks with ``esrally list tracks``. If a track shows up in this list, it just means that the track description is available locally but not necessarily all data files.
+当你复制数据(到目标机器)后，你可以通过 ``esrally list tracks`` 获取可用的 track 列表。如果一个 track 在这个列表内，它只是意味着 track 描述在本地可用，并不意味着所有的数据可用。
 
-Using cars
+使用 cars
 ----------
 
 .. note::
 
-    You can skip this section if you use Rally only as a load generator.
+    如果你仅仅把 Rally 当作一个负载发生器，你可以跳过这一节。
 
 If you have Rally configure and start Elasticsearch then you also need the out-of-the-box configurations available. Run the following command on a machine with Internet access::
 
