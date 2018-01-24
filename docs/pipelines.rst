@@ -1,11 +1,11 @@
 Pipelines
 =========
 
-A pipeline is a series of steps that are performed to get benchmark results. This is *not* intended to customize the actual benchmark but rather what happens before and after a benchmark.
+pipeline 是为了获得基准测试结果而执行的一系列步骤。这里的 pipeline 不是为了定义基准测试流程或者基准测试执行前后的步骤。 
 
-An example will clarify the concept: If you want to benchmark a binary distribution of Elasticsearch, Rally has to download a distribution archive, decompress it, start Elasticsearch and then run the benchmark. However, if you want to benchmark a source build of Elasticsearch, it first has to build a distribution with Gradle. So, in both cases, different steps are involved and that's what pipelines are for.
+通过一个例子来澄清这个：如果你希望对一个 Elasticsearch 二进制发行版进行基准测试，Rally 需要去下载一个发行版包，解压，启动 Elasticsearch，然后运行基准测试。然而，如果你希望对一份 Elasticsearch 源码进行基准测试，首先需要通过 Gradle 构建出一个二进制版本。所以，在这两个例子中，pipeline 执行了不同的步骤。
 
-You can get a list of all pipelines with ``esrally list pipelines``::
+你可以通过 ``esrally list pipelines`` 来获取所有的 pipeline 列表::
 
     Available pipelines:
 
@@ -19,9 +19,9 @@ You can get a list of all pipelines with ``esrally list pipelines``::
 benchmark-only
 ~~~~~~~~~~~~~~
 
-This is intended if you want to provision a cluster by yourself. Do not use this pipeline unless you are absolutely sure you need to. As Rally has not provisioned the cluster, results are not easily reproducable and it also cannot gather a lot of metrics (like CPU usage).
+这种方式适用于你希望对自己搭建的集群做基准测试。当你完全确定你需要这么做时，才使用这种方式，否则，别用。由于被测试的集群不是 Rally 启动的，测试的结果可能不容易重现，并且像CPU使用率这些指标没法被收集。
 
-To benchmark a cluster, you also have to specify the hosts to connect to. An example invocation::
+在对集群进行基准测试的时候，你同样需要指定要被连接的主机信息。调用方式如下::
 
     esrally --pipeline=benchmark-only --target-hosts=search-node-a.intranet.acme.com:9200,search-node-b.intranet.acme.com:9200
 
